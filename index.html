@@ -797,12 +797,16 @@
         </div>
 
         <div class="tabs">
-            <button class="tab active" onclick="showTab('tabela')">📊 Classificação</button>
+            <button class="tab active" onclick="showTab('dashboard')">🏠 Dashboard</button>
+            <button class="tab" onclick="showTab('tabela')">📊 Classificação</button>
             <button class="tab" onclick="showTab('tabelaJogos')">📋 Tabela de Jogos</button>
             <button class="tab" onclick="showTab('consultarJogos')">🔍 Consultar Jogos</button>
             <button class="tab" onclick="showTab('cadastrarJogo')" id="tabCadastrarJogo" style="display: none;">⚽ Cadastrar Jogo</button>
+            <button class="tab" onclick="showTab('copaReitor')">🏆 Copa do Reitor</button>
             <button class="tab" onclick="showTab('artilharia')">⚽ Artilharia</button>
             <button class="tab" onclick="showTab('estatisticas')">📈 Estatísticas</button>
+            <button class="tab" onclick="showTab('relatorios')">📋 Relatórios</button>
+            <button class="tab" onclick="showTab('historico')">📚 Histórico</button>
             <button class="tab" onclick="showTab('exCampeoes')">🏆 Ex-Campeões</button>
             <button class="tab" onclick="showTab('regulamento')">📋 Regulamento</button>
             <button class="tab" onclick="showTab('jogadores')" id="tabJogadores" style="display: none;">👥 Jogadores</button>
@@ -810,6 +814,140 @@
 
         <div id="alertContainer"></div>
         <div id="indicadorModo"></div>
+
+        <!-- ABA DASHBOARD -->
+        <div id="dashboard" class="tab-content">
+            <div class="card">
+                <h2>🏠 Dashboard - Visão Geral do Campeonato</h2>
+                
+                <!-- Estatísticas Principais -->
+                <div class="stats-grid" id="dashboardStats"></div>
+                
+                <!-- Progresso do Campeonato -->
+                <div style="background: #f7fafc; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h3 style="color: #4a5568; margin-bottom: 15px;">📈 Progresso do Campeonato</h3>
+                    <div id="progressoCampeonato"></div>
+                </div>
+                
+                <!-- Top 5 e Últimos Jogos -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h4 style="color: #4a5568; margin-bottom: 15px;">🏆 Top 5 Classificação</h4>
+                        <div id="top5Classificacao"></div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h4 style="color: #4a5568; margin-bottom: 15px;">⚽ Últimos Jogos</h4>
+                        <div id="ultimosJogos"></div>
+                    </div>
+                </div>
+                
+                <!-- Próximos Confrontos -->
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #ffc107;">
+                    <h4 style="color: #856404; margin-bottom: 15px;">📅 Próximos Confrontos Importantes</h4>
+                    <div id="proximosConfrontos"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA COPA DO REITOR -->
+        <div id="copaReitor" class="tab-content hidden">
+            <div class="card">
+                <h2>🏆 Copa do Reitor - Sistema de Playoffs</h2>
+                
+                <div style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);">
+                    <h3 style="color: #b8860b; margin-bottom: 10px; font-size: 1.3rem;">🏅 Torneio Eliminatório</h3>
+                    <p style="color: #8b7355; margin: 0; font-weight: 500;">Os 4 melhores colocados disputam a glória final</p>
+                </div>
+
+                <div id="statusCopaReitor"></div>
+                <div id="chaveamentoCopaReitor"></div>
+                <div id="jogosCopaReitor"></div>
+            </div>
+        </div>
+
+        <!-- ABA RELATÓRIOS -->
+        <div id="relatorios" class="tab-content hidden">
+            <div class="card">
+                <h2>📋 Relatórios Detalhados</h2>
+                
+                <div class="tabs" style="margin-bottom: 30px;">
+                    <button class="tab active" onclick="showReportTab('individual')">👤 Individual</button>
+                    <button class="tab" onclick="showReportTab('confrontos')">⚔️ Confrontos</button>
+                    <button class="tab" onclick="showReportTab('desempenho')">📊 Desempenho</button>
+                    <button class="tab" onclick="showReportTab('export')" id="tabExport" style="display: none;">📤 Exportar</button>
+                </div>
+
+                <!-- Relatório Individual -->
+                <div id="relatorio-individual" class="report-content">
+                    <div class="form-group">
+                        <label for="jogadorRelatorio">Selecionar Jogador:</label>
+                        <select id="jogadorRelatorio" onchange="gerarRelatorioIndividual()">
+                            <option value="">Escolha um jogador</option>
+                        </select>
+                    </div>
+                    <div id="relatorioIndividualContent"></div>
+                </div>
+
+                <!-- Relatório de Confrontos -->
+                <div id="relatorio-confrontos" class="report-content hidden">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jogador1Confronto">Jogador 1:</label>
+                            <select id="jogador1Confronto">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="jogador2Confronto">Jogador 2:</label>
+                            <select id="jogador2Confronto">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="gerarRelatorioConfronto()">📊 Gerar Relatório</button>
+                    <div id="relatorioConfrontoContent"></div>
+                </div>
+
+                <!-- Relatório de Desempenho -->
+                <div id="relatorio-desempenho" class="report-content hidden">
+                    <div id="relatorioDesempenhoContent"></div>
+                </div>
+
+                <!-- Exportar Dados -->
+                <div id="relatorio-export" class="report-content hidden">
+                    <div class="sample-data-section">
+                        <h3>📤 Exportar Dados do Campeonato</h3>
+                        <p>Gere relatórios para download ou impressão</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn" onclick="exportarRelatorioPDF()">📄 PDF Completo</button>
+                            <button class="btn" onclick="exportarCSV()">📊 CSV (Planilha)</button>
+                            <button class="btn" onclick="exportarJSON()">💾 Backup JSON</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA HISTÓRICO -->
+        <div id="historico" class="tab-content hidden">
+            <div class="card">
+                <h2>📚 Histórico de Campeonatos</h2>
+                
+                <div style="background: #e6fffa; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #4fd1c7;">
+                    <h3 style="color: #234e52; margin-bottom: 10px;">💾 Gerenciar Histórico</h3>
+                    <p style="color: #2d3748; margin-bottom: 15px;">Salve o campeonato atual ou carregue dados de edições anteriores</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn" onclick="salvarCampeonatoAtual()" id="btnSalvarCampeonato">💾 Salvar Campeonato Atual</button>
+                        <button class="btn" onclick="mostrarListaCampeonatos()" style="background: #38a169;">📚 Ver Histórico</button>
+                        <input type="file" id="importarCampeonato" accept=".json" style="display: none;" onchange="importarCampeonato()">
+                        <button class="btn" onclick="document.getElementById('importarCampeonato').click()" style="background: #d69e2e;">📤 Importar Campeonato</button>
+                    </div>
+                </div>
+
+                <div id="listaCampeonatos"></div>
+                <div id="comparacaoCampeonatos"></div>
+            </div>
+        </div>
 
         <!-- ABA TABELA -->
         <div id="tabela" class="tab-content">
@@ -1066,7 +1204,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #38a169 0%, #68d391 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(56, 161, 105, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Humberto Araújo</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 César Azevedo</h3>
                             <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2024.2</p>
                         </div>
                     </div>
@@ -1075,7 +1213,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #e53e3e 0%, #fc8181 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(229, 62, 62, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 César Azevedo</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Leonardo Guimarães</h3>
                             <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2024.1</p>
                         </div>
                     </div>
@@ -1084,8 +1222,8 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #805ad5 0%, #b794f6 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(128, 90, 213, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Leonardo Guimarãoes</h3>
-                            <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2023.1 e 2023.2</p>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Pedro Aires</h3>
+                            <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2023</p>
                         </div>
                     </div>
 
@@ -1093,7 +1231,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #d69e2e 0%, #f6e05e 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(214, 158, 46, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold; color: #2d3748;">🏆 Pedro Aires</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold; color: #2d3748;">🏆 Rafael Trentin</h3>
                             <p style="font-size: 1.1rem; opacity: 0.8; margin: 0; color: #4a5568;">2022.2</p>
                         </div>
                     </div>
@@ -1102,7 +1240,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #319795 0%, #4fd1c7 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(49, 151, 149, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Rafael Trentin</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Augusto Silva</h3>
                             <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2022.1</p>
                         </div>
                     </div>
@@ -1301,6 +1439,9 @@
         let modoAdmin = false;
         let statusConexao = 'conectando';
         let listenersAtivos = false;
+        let campeonatosHistorico = [];
+        let copaReitorAtiva = false;
+        let jogosCopaReitor = [];
         const SENHA_ADMIN = "fifa2025";
 
         // ALGORITMO ROUND ROBIN CLÁSSICO - IMPLEMENTAÇÃO CORRETA
@@ -3155,6 +3296,846 @@
             mostrarTabelaJogos();
             mostrarEstatisticas();
             mostrarArtilharia();
+            mostrarDashboard();
+            verificarCopaReitor();
+            atualizarSelectsRelatorios();
+        }
+
+        // ===== FUNÇÕES DO DASHBOARD =====
+        
+        function mostrarDashboard() {
+            mostrarEstatisticasDashboard();
+            mostrarProgressoCampeonato();
+            mostrarTop5Classificacao();
+            mostrarUltimosJogos();
+            mostrarProximosConfrontos();
+        }
+
+        function mostrarEstatisticasDashboard() {
+            const container = document.getElementById('dashboardStats');
+            if (!container) return;
+
+            const classificacao = obterClassificacao();
+            const totalJogos = jogos.length;
+            const totalGols = Object.values(jogadores).reduce((sum, j) => sum + j.golsPro, 0);
+            const jogadoresAtivos = classificacao.filter(j => j.jogos > 0).length;
+
+            const lider = classificacao[0] || { nome: '-', pontos: 0 };
+            const artilheiro = Object.values(jogadores).reduce((max, jogador) => 
+                jogador.golsPro > max.golsPro ? jogador : max
+            , { nome: '-', golsPro: 0 });
+
+            container.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${classificacao.length}</div>
+                    <div class="stat-label">👥 Jogadores</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalJogos}</div>
+                    <div class="stat-label">⚽ Jogos Realizados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalGols}</div>
+                    <div class="stat-label">🥅 Total de Gols</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #38a169 0%, #68d391 100%);">
+                    <div class="stat-number">${lider.nome}</div>
+                    <div class="stat-label">🏆 Líder (${lider.pontos}pts)</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #e53e3e 0%, #fc8181 100%);">
+                    <div class="stat-number">${artilheiro.nome}</div>
+                    <div class="stat-label">⚽ Artilheiro (${artilheiro.golsPro})</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #805ad5 0%, #b794f6 100%);">
+                    <div class="stat-number">${totalJogos > 0 ? (totalGols / totalJogos).toFixed(1) : '0.0'}</div>
+                    <div class="stat-label">📊 Média Gols/Jogo</div>
+                </div>
+            `;
+        }
+
+        function mostrarProgressoCampeonato() {
+            const container = document.getElementById('progressoCampeonato');
+            if (!container) return;
+
+            const totalJogadores = Object.keys(jogadores).length;
+            const totalJogosPrevistos = totalJogadores > 0 ? (totalJogadores - 1) * totalJogadores : 0;
+            const jogosRealizados = jogos.length;
+            const percentual = totalJogosPrevistos > 0 ? (jogosRealizados / totalJogosPrevistos * 100).toFixed(1) : 0;
+
+            const primeiroTurnoCompleto = verificarTurnoCompleto(1);
+            const segundoTurnoCompleto = verificarTurnoCompleto(2);
+
+            container.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-weight: 600;">Progresso Geral</span>
+                        <span style="font-weight: 600;">${jogosRealizados}/${totalJogosPrevistos} jogos (${percentual}%)</span>
+                    </div>
+                    <div style="width: 100%; background: #e2e8f0; border-radius: 10px; height: 20px; overflow: hidden;">
+                        <div style="width: ${percentual}%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%; transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="text-align: center; padding: 15px; background: ${primeiroTurnoCompleto ? '#c6f6d5' : '#fff3cd'}; border-radius: 8px;">
+                        <div style="font-size: 1.2rem; font-weight: bold; color: ${primeiroTurnoCompleto ? '#2f855a' : '#856404'};">
+                            ${primeiroTurnoCompleto ? '✅' : '⏳'} 1º Turno
+                        </div>
+                        <div style="color: #718096; font-size: 14px; margin-top: 5px;">
+                            ${primeiroTurnoCompleto ? 'Completo' : 'Em andamento'}
+                        </div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: ${segundoTurnoCompleto ? '#c6f6d5' : '#f7fafc'}; border-radius: 8px;">
+                        <div style="font-size: 1.2rem; font-weight: bold; color: ${segundoTurnoCompleto ? '#2f855a' : '#718096'};">
+                            ${segundoTurnoCompleto ? '✅' : '⏸️'} 2º Turno
+                        </div>
+                        <div style="color: #718096; font-size: 14px; margin-top: 5px;">
+                            ${segundoTurnoCompleto ? 'Completo' : (primeiroTurnoCompleto ? 'Em andamento' : 'Aguardando')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function verificarTurnoCompleto(turno) {
+            const nomesJogadores = Object.keys(jogadores);
+            if (nomesJogadores.length < 2) return false;
+
+            const confrontosEsperados = (nomesJogadores.length * (nomesJogadores.length - 1)) / 2;
+            const jogosDoTurno = jogos.filter(jogo => (jogo.turno || 1) === turno);
+            return jogosDoTurno.length >= confrontosEsperados;
+        }
+
+        function mostrarTop5Classificacao() {
+            const container = document.getElementById('top5Classificacao');
+            if (!container) return;
+
+            const classificacao = obterClassificacao().slice(0, 5);
+            
+            let html = '';
+            classificacao.forEach((jogador, index) => {
+                const posicao = index + 1;
+                const medalha = posicao === 1 ? '🥇' : posicao === 2 ? '🥈' : posicao === 3 ? '🥉' : `${posicao}º`;
+                
+                html += `
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e2e8f0;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.2rem; min-width: 30px;">${medalha}</span>
+                            <span style="font-weight: 600;">${jogador.nome}</span>
+                        </div>
+                        <span style="font-weight: bold; color: #667eea;">${jogador.pontos}pts</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html || '<div style="color: #718096; text-align: center;">Nenhum jogo realizado ainda</div>';
+        }
+
+        function mostrarUltimosJogos() {
+            const container = document.getElementById('ultimosJogos');
+            if (!container) return;
+
+            const ultimosJogos = [...jogos]
+                .sort((a, b) => new Date(b.data) - new Date(a.data))
+                .slice(0, 5);
+
+            let html = '';
+            ultimosJogos.forEach(jogo => {
+                const data = new Date(jogo.data + 'T00:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+                const resultado = jogo.golsMandante > jogo.golsVisitante ? 
+                    `<span style="color: #2f855a;">${jogo.mandante}</span>` :
+                    jogo.golsVisitante > jogo.golsMandante ?
+                    `<span style="color: #2f855a;">${jogo.visitante}</span>` :
+                    '<span style="color: #d69e2e;">Empate</span>';
+
+                html += `
+                    <div style="padding: 8px 0; border-bottom: 1px solid #e2e8f0; font-size: 14px;">
+                        <div style="font-weight: 600;">${jogo.mandante} ${jogo.golsMandante} x ${jogo.golsVisitante} ${jogo.visitante}</div>
+                        <div style="color: #718096; font-size: 12px;">${data} • ${resultado}</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html || '<div style="color: #718096; text-align: center; font-size: 14px;">Nenhum jogo realizado ainda</div>';
+        }
+
+        function mostrarProximosConfrontos() {
+            const container = document.getElementById('proximosConfrontos');
+            if (!container) return;
+
+            // Aqui poderia implementar lógica para sugerir próximos jogos importantes
+            // Por enquanto, vou mostrar uma mensagem genérica
+            container.innerHTML = `
+                <div style="text-align: center; color: #856404;">
+                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">🎯 Dicas para Próximos Jogos</div>
+                    <div style="font-size: 14px;">
+                        • Priorize jogos com menos confrontos realizados<br>
+                        • Acompanhe os jogos decisivos para classificação<br>
+                        • Verifique confrontos diretos entre líderes
+                    </div>
+                </div>
+            `;
+        }
+
+        // ===== FUNÇÕES DA COPA DO REITOR =====
+
+        function verificarCopaReitor() {
+            const container = document.getElementById('statusCopaReitor');
+            if (!container) return;
+
+            const classificacao = obterClassificacao();
+            const campeonatoTerminado = verificarCampeonatoCompleto();
+
+            if (!campeonatoTerminado) {
+                container.innerHTML = `
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 10px; text-align: center; border: 1px solid #ffc107; margin-bottom: 20px;">
+                        <h4 style="color: #856404; margin-bottom: 10px;">⏳ Aguardando Final do Campeonato</h4>
+                        <p style="color: #856404; margin: 0;">A Copa do Reitor será habilitada após o término da fase de pontos corridos.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const classificados = classificacao.slice(0, 4);
+            
+            if (classificados.length < 4) {
+                container.innerHTML = `
+                    <div style="background: #fed7d7; padding: 20px; border-radius: 10px; text-align: center; border: 1px solid #feb2b2; margin-bottom: 20px;">
+                        <h4 style="color: #c53030; margin-bottom: 10px;">❌ Participantes Insuficientes</h4>
+                        <p style="color: #c53030; margin: 0;">São necessários pelo menos 4 jogadores para a Copa do Reitor.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            mostrarChaveamentoCopa(classificados);
+        }
+
+        function verificarCampeonatoCompleto() {
+            const nomesJogadores = Object.keys(jogadores);
+            if (nomesJogadores.length < 2) return false;
+
+            const totalJogosEsperados = nomesJogadores.length * (nomesJogadores.length - 1);
+            const jogosRealizados = jogos.length;
+            
+            return jogosRealizados >= totalJogosEsperados * 0.8; // 80% dos jogos realizados
+        }
+
+        function mostrarChaveamentoCopa(classificados) {
+            const container = document.getElementById('chaveamentoCopaReitor');
+            if (!container) return;
+
+            // Definir confrontos das semifinais
+            const semifinal1 = { mandante: classificados[0].nome, visitante: classificados[3].nome };
+            const semifinal2 = { mandante: classificados[1].nome, visitante: classificados[2].nome };
+
+            container.innerHTML = `
+                <div style="background: #e6fffa; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #4fd1c7;">
+                    <h4 style="color: #234e52; margin-bottom: 15px;">🏆 Classificados para a Copa do Reitor</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        ${classificados.map((jogador, index) => `
+                            <div style="background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="font-size: 1.2rem; margin-bottom: 5px;">
+                                    ${index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅'} ${index + 1}º Lugar
+                                </div>
+                                <div style="font-weight: 600; color: #4a5568;">${jogador.nome}</div>
+                                <div style="color: #718096; font-size: 14px;">${jogador.pontos} pontos</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <h4 style="color: #4a5568; margin-bottom: 15px; text-align: center;">⚔️ Chaveamento das Semifinais</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="background: #f7fafc; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-weight: 600; color: #667eea; margin-bottom: 10px;">SEMIFINAL 1</div>
+                            <div style="font-size: 1.1rem; font-weight: 600;">${semifinal1.mandante}</div>
+                            <div style="margin: 10px 0; font-size: 1.5rem;">⚔️</div>
+                            <div style="font-size: 1.1rem; font-weight: 600;">${semifinal1.visitante}</div>
+                        </div>
+                        <div style="background: #f7fafc; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-weight: 600; color: #667eea; margin-bottom: 10px;">SEMIFINAL 2</div>
+                            <div style="font-size: 1.1rem; font-weight: 600;">${semifinal2.mandante}</div>
+                            <div style="margin: 10px 0; font-size: 1.5rem;">⚔️</div>
+                            <div style="font-size: 1.1rem; font-weight: 600;">${semifinal2.visitante}</div>
+                        </div>
+                    </div>
+                    
+                    ${modoAdmin ? `
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn" onclick="iniciarCopaReitor()">🚀 Iniciar Copa do Reitor</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function iniciarCopaReitor() {
+            if (!modoAdmin) return;
+            
+            mostrarAlerta('🏆 Copa do Reitor iniciada! Cadastre os jogos das semifinais na aba "Cadastrar Jogo".', 'success');
+            // Aqui poderia implementar mais lógica específica para a Copa do Reitor
+        }
+
+        // ===== FUNÇÕES DOS RELATÓRIOS =====
+
+        function showReportTab(reportType) {
+            document.querySelectorAll('.report-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            document.querySelectorAll('#relatorios .tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(`relatorio-${reportType}`).classList.remove('hidden');
+            document.querySelector(`#relatorios .tab[onclick="showReportTab('${reportType}')"]`).classList.add('active');
+
+            // Mostrar aba de exportar apenas para admin
+            const tabExport = document.getElementById('tabExport');
+            if (tabExport) {
+                tabExport.style.display = modoAdmin ? 'block' : 'none';
+            }
+
+            if (reportType === 'desempenho') {
+                gerarRelatorioDesempenho();
+            }
+        }
+
+        function atualizarSelectsRelatorios() {
+            const selects = ['jogadorRelatorio', 'jogador1Confronto', 'jogador2Confronto'];
+            const nomesOrdenados = Object.keys(jogadores).sort();
+
+            selects.forEach(selectId => {
+                const select = document.getElementById(selectId);
+                if (select) {
+                    const valorAtual = select.value;
+                    select.innerHTML = '<option value="">Escolha um jogador</option>';
+                    nomesOrdenados.forEach(nome => {
+                        select.innerHTML += `<option value="${nome}">${nome}</option>`;
+                    });
+                    if (valorAtual) select.value = valorAtual;
+                }
+            });
+        }
+
+        function gerarRelatorioIndividual() {
+            const nomeJogador = document.getElementById('jogadorRelatorio').value;
+            const container = document.getElementById('relatorioIndividualContent');
+            
+            if (!nomeJogador || !jogadores[nomeJogador]) {
+                container.innerHTML = '';
+                return;
+            }
+
+            const jogador = jogadores[nomeJogador];
+            const jogosJogador = jogos.filter(jogo => jogo.mandante === nomeJogador || jogo.visitante === nomeJogador);
+            
+            // Calcular estatísticas avançadas
+            const vitorias = jogosJogador.filter(jogo => 
+                (jogo.mandante === nomeJogador && jogo.golsMandante > jogo.golsVisitante) ||
+                (jogo.visitante === nomeJogador && jogo.golsVisitante > jogo.golsMandante)
+            );
+            
+            const derrotas = jogosJogador.filter(jogo => 
+                (jogo.mandante === nomeJogador && jogo.golsMandante < jogo.golsVisitante) ||
+                (jogo.visitante === nomeJogador && jogo.golsVisitante < jogo.golsMandante)
+            );
+
+            const jogosMandante = jogosJogador.filter(jogo => jogo.mandante === nomeJogador);
+            const jogosVisitante = jogosJogador.filter(jogo => jogo.visitante === nomeJogador);
+
+            const classificacao = obterClassificacao();
+            const posicao = classificacao.findIndex(j => j.nome === nomeJogador) + 1;
+
+            container.innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px;">
+                    <h3 style="color: #4a5568; margin-bottom: 20px; text-align: center;">📊 Relatório Individual - ${nomeJogador}</h3>
+                    
+                    <div class="stats-grid" style="margin-bottom: 20px;">
+                        <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="stat-number">${posicao}º</div>
+                            <div class="stat-label">🏆 Posição</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #38a169 0%, #68d391 100%);">
+                            <div class="stat-number">${jogador.pontos}</div>
+                            <div class="stat-label">📊 Pontos</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #e53e3e 0%, #fc8181 100%);">
+                            <div class="stat-number">${jogador.golsPro}</div>
+                            <div class="stat-label">⚽ Gols Marcados</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #805ad5 0%, #b794f6 100%);">
+                            <div class="stat-number">${jogador.aproveitamento.toFixed(1)}%</div>
+                            <div class="stat-label">📈 Aproveitamento</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h4 style="color: #4a5568; margin-bottom: 15px;">🏠 Como Mandante</h4>
+                            <div style="background: #f7fafc; padding: 15px; border-radius: 8px;">
+                                <div>Jogos: ${jogosMandante.length}</div>
+                                <div>Vitórias: ${jogosMandante.filter(j => j.golsMandante > j.golsVisitante).length}</div>
+                                <div>Empates: ${jogosMandante.filter(j => j.golsMandante === j.golsVisitante).length}</div>
+                                <div>Derrotas: ${jogosMandante.filter(j => j.golsMandante < j.golsVisitante).length}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #4a5568; margin-bottom: 15px;">✈️ Como Visitante</h4>
+                            <div style="background: #f7fafc; padding: 15px; border-radius: 8px;">
+                                <div>Jogos: ${jogosVisitante.length}</div>
+                                <div>Vitórias: ${jogosVisitante.filter(j => j.golsVisitante > j.golsMandante).length}</div>
+                                <div>Empates: ${jogosVisitante.filter(j => j.golsVisitante === j.golsMandante).length}</div>
+                                <div>Derrotas: ${jogosVisitante.filter(j => j.golsVisitante < j.golsMandante).length}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function gerarRelatorioConfronto() {
+            const jogador1 = document.getElementById('jogador1Confronto').value;
+            const jogador2 = document.getElementById('jogador2Confronto').value;
+            const container = document.getElementById('relatorioConfrontoContent');
+
+            if (!jogador1 || !jogador2) {
+                mostrarAlerta('Selecione ambos os jogadores!', 'error');
+                return;
+            }
+
+            if (jogador1 === jogador2) {
+                mostrarAlerta('Selecione jogadores diferentes!', 'error');
+                return;
+            }
+
+            const confrontos = jogos.filter(jogo => 
+                (jogo.mandante === jogador1 && jogo.visitante === jogador2) ||
+                (jogo.mandante === jogador2 && jogo.visitante === jogador1)
+            );
+
+            let vitorias1 = 0, vitorias2 = 0, empates = 0;
+            let gols1 = 0, gols2 = 0;
+
+            confrontos.forEach(jogo => {
+                if (jogo.mandante === jogador1) {
+                    gols1 += jogo.golsMandante;
+                    gols2 += jogo.golsVisitante;
+                    if (jogo.golsMandante > jogo.golsVisitante) vitorias1++;
+                    else if (jogo.golsVisitante > jogo.golsMandante) vitorias2++;
+                    else empates++;
+                } else {
+                    gols1 += jogo.golsVisitante;
+                    gols2 += jogo.golsMandante;
+                    if (jogo.golsVisitante > jogo.golsMandante) vitorias1++;
+                    else if (jogo.golsMandante > jogo.golsVisitante) vitorias2++;
+                    else empates++;
+                }
+            });
+
+            container.innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px;">
+                    <h3 style="color: #4a5568; margin-bottom: 20px; text-align: center;">⚔️ ${jogador1} vs ${jogador2}</h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; margin-bottom: 20px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #667eea;">${jogador1}</div>
+                            <div style="font-size: 2rem; font-weight: bold; margin: 10px 0;">${vitorias1}</div>
+                            <div style="color: #718096;">Vitórias</div>
+                        </div>
+                        <div style="text-align: center; color: #d69e2e;">
+                            <div style="font-size: 1.2rem; font-weight: bold;">VS</div>
+                            <div style="font-size: 1.5rem; font-weight: bold; margin: 5px 0;">${empates}</div>
+                            <div style="font-size: 14px;">Empates</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #e53e3e;">${jogador2}</div>
+                            <div style="font-size: 2rem; font-weight: bold; margin: 10px 0;">${vitorias2}</div>
+                            <div style="color: #718096;">Vitórias</div>
+                        </div>
+                    </div>
+
+                    <div style="background: #f7fafc; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px;">
+                        <div style="font-weight: 600; margin-bottom: 10px;">📊 Estatísticas Gerais</div>
+                        <div>Total de confrontos: ${confrontos.length}</div>
+                        <div>Gols ${jogador1}: ${gols1} | Gols ${jogador2}: ${gols2}</div>
+                        <div>Média de gols por jogo: ${confrontos.length > 0 ? ((gols1 + gols2) / confrontos.length).toFixed(1) : 0}</div>
+                    </div>
+
+                    ${confrontos.length > 0 ? `
+                        <h4 style="color: #4a5568; margin-bottom: 15px;">🏟️ Histórico de Confrontos</h4>
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            ${confrontos.map(jogo => {
+                                const data = new Date(jogo.data + 'T00:00:00').toLocaleDateString('pt-BR');
+                                return `
+                                    <div style="padding: 10px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+                                        <span>${jogo.mandante} ${jogo.golsMandante} x ${jogo.golsVisitante} ${jogo.visitante}</span>
+                                        <span style="color: #718096; font-size: 14px;">${data}</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    ` : '<div style="text-align: center; color: #718096;">Ainda não houve confrontos entre estes jogadores</div>'}
+                </div>
+            `;
+        }
+
+        function gerarRelatorioDesempenho() {
+            const container = document.getElementById('relatorioDesempenhoContent');
+            if (!container) return;
+
+            const classificacao = obterClassificacao();
+            const artilheiros = obterRankingArtilheiros().slice(0, 5);
+
+            // Estatísticas gerais
+            const totalJogos = jogos.length;
+            const totalGols = Object.values(jogadores).reduce((sum, j) => sum + j.golsPro, 0);
+            const mediaGolsJogo = totalJogos > 0 ? (totalGols / totalJogos).toFixed(1) : 0;
+
+            // Jogos com mais gols
+            const jogosMaisGols = [...jogos]
+                .sort((a, b) => (b.golsMandante + b.golsVisitante) - (a.golsMandante + a.golsVisitante))
+                .slice(0, 5);
+
+            container.innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <h3 style="color: #4a5568; margin-bottom: 20px; text-align: center;">📊 Relatório de Desempenho Geral</h3>
+
+                    <div class="stats-grid" style="margin-bottom: 30px;">
+                        <div class="stat-card">
+                            <div class="stat-number">${totalJogos}</div>
+                            <div class="stat-label">⚽ Total de Jogos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${totalGols}</div>
+                            <div class="stat-label">🥅 Total de Gols</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${mediaGolsJogo}</div>
+                            <div class="stat-label">📊 Média Gols/Jogo</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${jogos.filter(j => j.golsMandante === j.golsVisitante).length}</div>
+                            <div class="stat-label">🤝 Empates</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h4 style="color: #4a5568; margin-bottom: 15px;">🏆 Top 5 Classificação</h4>
+                            <div style="background: #f7fafc; padding: 15px; border-radius: 8px;">
+                                ${classificacao.slice(0, 5).map((jogador, index) => `
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <span>${index + 1}. ${jogador.nome}</span>
+                                        <span style="font-weight: bold;">${jogador.pontos}pts</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #4a5568; margin-bottom: 15px;">⚽ Top 5 Artilheiros</h4>
+                            <div style="background: #f7fafc; padding: 15px; border-radius: 8px;">
+                                ${artilheiros.map((jogador, index) => `
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <span>${index + 1}. ${jogador.nome}</span>
+                                        <span style="font-weight: bold;">${jogador.golsPro} gols</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <h4 style="color: #4a5568; margin-bottom: 15px;">🔥 Jogos com Mais Gols</h4>
+                        <div style="background: #f7fafc; padding: 15px; border-radius: 8px;">
+                            ${jogosMaisGols.map(jogo => {
+                                const totalGols = jogo.golsMandante + jogo.golsVisitante;
+                                const data = new Date(jogo.data + 'T00:00:00').toLocaleDateString('pt-BR');
+                                return `
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <span>${jogo.mandante} ${jogo.golsMandante} x ${jogo.golsVisitante} ${jogo.visitante}</span>
+                                        <span style="font-weight: bold;">${totalGols} gols (${data})</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ===== FUNÇÕES DO HISTÓRICO =====
+
+        function salvarCampeonatoAtual() {
+            if (!modoAdmin) return;
+
+            const nomeInput = prompt('Digite o nome para salvar este campeonato:', `Campeonato ${new Date().getFullYear()}.${new Date().getMonth() + 1}`);
+            if (!nomeInput) return;
+
+            const campeonato = {
+                id: Date.now(),
+                nome: nomeInput,
+                dataFinal: new Date().toISOString(),
+                jogadores: { ...jogadores },
+                jogos: [...jogos],
+                campeao: obterClassificacao()[0]?.nome || 'N/A',
+                estatisticas: {
+                    totalJogos: jogos.length,
+                    totalGols: Object.values(jogadores).reduce((sum, j) => sum + j.golsPro, 0),
+                    totalJogadores: Object.keys(jogadores).length
+                }
+            };
+
+            // Salvar no localStorage
+            campeonatosHistorico = JSON.parse(localStorage.getItem('campeonatosHistorico') || '[]');
+            campeonatosHistorico.push(campeonato);
+            localStorage.setItem('campeonatosHistorico', JSON.stringify(campeonatosHistorico));
+
+            mostrarAlerta(`💾 Campeonato "${nomeInput}" salvo no histórico!`);
+            mostrarListaCampeonatos();
+        }
+
+        function mostrarListaCampeonatos() {
+            const container = document.getElementById('listaCampeonatos');
+            if (!container) return;
+
+            campeonatosHistorico = JSON.parse(localStorage.getItem('campeonatosHistorico') || '[]');
+
+            if (campeonatosHistorico.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; color: #718096; margin: 20px 0;">
+                        📂 Nenhum campeonato salvo ainda no histórico
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<h3 style="color: #4a5568; margin: 20px 0;">📚 Campeonatos Salvos</h3>';
+            html += '<div style="display: grid; gap: 15px;">';
+
+            campeonatosHistorico.forEach(campeonato => {
+                const dataFormatada = new Date(campeonato.dataFinal).toLocaleDateString('pt-BR');
+                html += `
+                    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; justify-content: between; align-items: start;">
+                            <div style="flex: 1;">
+                                <h4 style="color: #4a5568; margin-bottom: 10px;">🏆 ${campeonato.nome}</h4>
+                                <div style="color: #718096; font-size: 14px; margin-bottom: 10px;">
+                                    📅 Finalizado em: ${dataFormatada}<br>
+                                    👑 Campeão: ${campeonato.campeao}<br>
+                                    📊 ${campeonato.estatisticas.totalJogos} jogos • ${campeonato.estatisticas.totalGols} gols • ${campeonato.estatisticas.totalJogadores} jogadores
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-direction: column;">
+                                <button class="btn btn-small" onclick="visualizarCampeonato(${campeonato.id})" style="background: #38a169;">👁️ Ver</button>
+                                <button class="btn btn-small" onclick="carregarCampeonato(${campeonato.id})" style="background: #3182ce;">📤 Carregar</button>
+                                <button class="btn btn-small btn-danger" onclick="excluirCampeonato(${campeonato.id})">🗑️ Excluir</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function visualizarCampeonato(id) {
+            const campeonato = campeonatosHistorico.find(c => c.id === id);
+            if (!campeonato) return;
+
+            // Criar modal para visualizar
+            const modal = document.createElement('div');
+            modal.className = 'senha-modal';
+            modal.innerHTML = `
+                <div class="senha-modal-content" style="max-width: 600px; max-height: 80vh; overflow-y: auto;">
+                    <h3 style="color: #4a5568; margin-bottom: 20px;">📊 ${campeonato.nome}</h3>
+                    
+                    <div class="stats-grid" style="margin-bottom: 20px;">
+                        <div class="stat-card">
+                            <div class="stat-number">${campeonato.estatisticas.totalJogadores}</div>
+                            <div class="stat-label">👥 Jogadores</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${campeonato.estatisticas.totalJogos}</div>
+                            <div class="stat-label">⚽ Jogos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${campeonato.estatisticas.totalGols}</div>
+                            <div class="stat-label">🥅 Gols</div>
+                        </div>
+                    </div>
+
+                    <h4 style="color: #4a5568; margin: 15px 0;">🏆 Classificação Final</h4>
+                    <div style="background: #f7fafc; padding: 15px; border-radius: 8px; max-height: 200px; overflow-y: auto;">
+                        ${Object.values(campeonato.jogadores)
+                            .sort((a, b) => {
+                                const pontosA = (a.vitorias * 3) + (a.empates * 1);
+                                const pontosB = (b.vitorias * 3) + (b.empates * 1);
+                                return pontosB - pontosA;
+                            })
+                            .map((jogador, index) => `
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>${index + 1}. ${jogador.nome}</span>
+                                    <span style="font-weight: bold;">${(jogador.vitorias * 3) + (jogador.empates * 1)}pts</span>
+                                </div>
+                            `).join('')}
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-danger" onclick="fecharModalSenha()">❌ Fechar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function carregarCampeonato(id) {
+            if (!modoAdmin) return;
+
+            const campeonato = campeonatosHistorico.find(c => c.id === id);
+            if (!campeonato) return;
+
+            if (confirm(`Tem certeza que deseja carregar o campeonato "${campeonato.nome}"? Os dados atuais serão substituídos.`)) {
+                jogadores = { ...campeonato.jogadores };
+                jogos = [...campeonato.jogos];
+                
+                salvarDadosLocal();
+                atualizarTudo();
+                
+                mostrarAlerta(`📤 Campeonato "${campeonato.nome}" carregado!`);
+                showTab('dashboard');
+            }
+        }
+
+        function excluirCampeonato(id) {
+            if (!modoAdmin) return;
+
+            const campeonato = campeonatosHistorico.find(c => c.id === id);
+            if (!campeonato) return;
+
+            if (confirm(`Tem certeza que deseja excluir o campeonato "${campeonato.nome}"?`)) {
+                campeonatosHistorico = campeonatosHistorico.filter(c => c.id !== id);
+                localStorage.setItem('campeonatosHistorico', JSON.stringify(campeonatosHistorico));
+                
+                mostrarAlerta(`🗑️ Campeonato "${campeonato.nome}" excluído!`);
+                mostrarListaCampeonatos();
+            }
+        }
+
+        function importarCampeonato() {
+            if (!modoAdmin) return;
+
+            const file = document.getElementById('importarCampeonato').files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const dados = JSON.parse(e.target.result);
+                    
+                    if (dados.jogadores && dados.jogos) {
+                        if (confirm('Importar como campeonato atual? (substituirá os dados atuais)')) {
+                            jogadores = dados.jogadores;
+                            jogos = dados.jogos;
+                            salvarDadosLocal();
+                            atualizarTudo();
+                            mostrarAlerta('📤 Campeonato importado como atual!');
+                        } else {
+                            // Salvar no histórico
+                            const nome = prompt('Nome para salvar no histórico:', `Importado ${new Date().toLocaleDateString('pt-BR')}`);
+                            if (nome) {
+                                const campeonato = {
+                                    id: Date.now(),
+                                    nome: nome,
+                                    dataFinal: new Date().toISOString(),
+                                    jogadores: dados.jogadores,
+                                    jogos: dados.jogos,
+                                    campeao: 'N/A',
+                                    estatisticas: {
+                                        totalJogos: dados.jogos.length,
+                                        totalGols: Object.values(dados.jogadores).reduce((sum, j) => sum + j.golsPro, 0),
+                                        totalJogadores: Object.keys(dados.jogadores).length
+                                    }
+                                };
+                                
+                                campeonatosHistorico.push(campeonato);
+                                localStorage.setItem('campeonatosHistorico', JSON.stringify(campeonatosHistorico));
+                                mostrarListaCampeonatos();
+                                mostrarAlerta('💾 Campeonato salvo no histórico!');
+                            }
+                        }
+                    } else {
+                        throw new Error('Formato inválido');
+                    }
+                } catch (error) {
+                    mostrarAlerta('❌ Erro ao importar: arquivo inválido', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // ===== FUNÇÕES DE EXPORTAÇÃO =====
+
+        function exportarRelatorioPDF() {
+            if (!modoAdmin) return;
+            
+            // Simular exportação PDF (em um sistema real usaria bibliotecas como jsPDF)
+            mostrarAlerta('📄 Função de exportação PDF em desenvolvimento...', 'error');
+        }
+
+        function exportarCSV() {
+            if (!modoAdmin) return;
+
+            const classificacao = obterClassificacao();
+            let csv = 'Posição,Nome,Pontos,Jogos,Vitórias,Empates,Derrotas,Gols Pró,Gols Sofridos,Saldo,Aproveitamento\n';
+            
+            classificacao.forEach((jogador, index) => {
+                csv += `${index + 1},${jogador.nome},${jogador.pontos},${jogador.jogos},${jogador.vitorias},${jogador.empates},${jogador.derrotas},${jogador.golsPro},${jogador.golsSofridos},${jogador.saldoGols},${jogador.aproveitamento.toFixed(1)}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `campeonato_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            mostrarAlerta('📊 Relatório CSV baixado!');
+        }
+
+        function exportarJSON() {
+            if (!modoAdmin) return;
+
+            const dados = {
+                nome: `Campeonato ${new Date().toISOString().split('T')[0]}`,
+                dataExportacao: new Date().toISOString(),
+                jogadores: jogadores,
+                jogos: jogos,
+                estatisticas: {
+                    totalJogos: jogos.length,
+                    totalGols: Object.values(jogadores).reduce((sum, j) => sum + j.golsPro, 0),
+                    totalJogadores: Object.keys(jogadores).length
+                }
+            };
+
+            const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `backup_campeonato_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            mostrarAlerta('💾 Backup JSON baixado!');
         }
 
         // INICIALIZAÇÃO
