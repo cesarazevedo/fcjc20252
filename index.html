@@ -1,0 +1,3239 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Campeonato FIFA EA FC25 - Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .demo-banner {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+			 position: relative;
+			z-index: 2;
+        }
+
+        .demo-banner strong {
+            color: #ffd700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tab:hover:not(.active) {
+            background: #f7fafc;
+            transform: translateY(-2px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 6px;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .table th, .table td {
+            padding: 15px 10px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .table td {
+            text-align: center;
+        }
+
+        .table tr:hover {
+            background: #f7fafc;
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+        }
+
+        .position {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .position.first {
+            color: #ffd700;
+        }
+
+        .position.second {
+            color: #c0c0c0;
+        }
+
+        .position.third {
+            color: #cd7f32;
+        }
+
+        .classificado {
+            background-color: #c6f6d5 !important;
+        }
+
+        .rebaixado {
+            background-color: #fed7d7 !important;
+        }
+
+        .jogo-realizado {
+            background-color: #e6fffa !important;
+        }
+
+        .jogo-pendente {
+            background-color: #fffbf0 !important;
+        }
+
+        #regulamento ul, #regulamento ol {
+            list-style-position: inside;
+        }
+
+        #regulamento li {
+            margin-bottom: 8px;
+        }
+
+        #regulamento h3 {
+            font-size: 1.2rem;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: #c6f6d5;
+            color: #2f855a;
+            border: 1px solid #9ae6b4;
+        }
+
+        .alert-error {
+            background: #fed7d7;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .jogos-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .jogo-item {
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #f7fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .jogo-info {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .jogo-acoes {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .jogo-resultado {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
+
+        .jogo-data {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .sample-data-section {
+            background: #e6fffa;
+            border: 1px solid #4fd1c7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .sample-data-section h3 {
+            color: #234e52;
+            margin-bottom: 10px;
+        }
+
+        .sample-data-section p {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .modo-consulta {
+            opacity: 0.6;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .modo-consulta input, .modo-consulta select, .modo-consulta button {
+            background: #f5f5f5 !important;
+            color: #999 !important;
+            cursor: not-allowed !important;
+        }
+
+        .modo-admin {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            color: #155724;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .filtros-resumo {
+            background: #e6fffa;
+            border: 1px solid #4fd1c7;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #234e52;
+        }
+
+        .senha-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .senha-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .status-conexao {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-online {
+            background: #c6f6d5;
+            color: #2f855a;
+        }
+
+        .status-offline {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .status-conectando {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .turno-header {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* NOVO CSS PARA SISTEMA DE RODADAS */
+        .rodada-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .rodada-header:first-of-type {
+            margin-top: 10px;
+        }
+
+        .estatisticas-rodada {
+            margin-top: 10px;
+            color: #718096;
+            font-size: 14px;
+            text-align: center;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .resumo-turno {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e6fffa;
+            border-radius: 8px;
+            text-align: center;
+            color: #234e52;
+            border: 1px solid #4fd1c7;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        /* CSS PARA EX-CAMPEÕES */
+        .campeao-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .campeao-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2) !important;
+        }
+
+        .campeao-destaque {
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            }
+            50% { 
+                box-shadow: 0 8px 35px rgba(102, 126, 234, 0.5);
+            }
+        }
+
+        .stat-ex-campeoes {
+            transition: all 0.3s ease;
+        }
+
+        .stat-ex-campeoes:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .tabela-jogos {
+            font-size: 14px;
+        }
+
+        .tabela-jogos th {
+            padding: 10px 8px;
+            font-size: 13px;
+        }
+
+        .tabela-jogos td {
+            padding: 8px 6px;
+            font-size: 13px;
+        }
+
+        /* ===== CSS PARA ARTILHARIA ===== */
+        .artilharia-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .artilheiro-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .artilheiro-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .artilheiro-posicao {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4a5568;
+            min-width: 40px;
+            text-align: center;
+            margin-right: 20px;
+        }
+
+        .artilheiro-posicao.first {
+            color: #ffd700;
+            font-size: 2rem;
+        }
+
+        .artilheiro-posicao.second {
+            color: #c0c0c0;
+            font-size: 1.8rem;
+        }
+
+        .artilheiro-posicao.third {
+            color: #cd7f32;
+            font-size: 1.7rem;
+        }
+
+        .artilheiro-foto {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 3px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .artilheiro-foto:hover {
+            border-color: #667eea;
+        }
+
+        .artilheiro-foto.placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .artilheiro-info {
+            flex: 1;
+        }
+
+        .artilheiro-nome {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .artilheiro-posicao-texto {
+            color: #718096;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .artilheiro-gols {
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .artilheiro-numero-gols {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .artilheiro-label-gols {
+            color: #718096;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .foto-upload-area {
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .foto-upload-area:hover {
+            border-color: #667eea;
+            background-color: #f7fafc;
+        }
+
+        .foto-upload-area.drag-over {
+            border-color: #667eea;
+            background-color: #e6fffa;
+        }
+
+        .preview-foto {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .foto-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+                line-height: 1.3;
+            }
+            
+            .tabs {
+                justify-content: center;
+            }
+            
+            .tab {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .table {
+                font-size: 14px;
+            }
+            
+            .table th, .table td {
+                padding: 8px 5px;
+            }
+
+            .tabela-jogos th, .tabela-jogos td {
+                padding: 6px 4px;
+                font-size: 12px;
+            }
+
+            #regulamento {
+                font-size: 14px;
+            }
+
+            #regulamento h3 {
+                font-size: 1.1rem;
+            }
+
+            .rodada-header {
+                font-size: 1rem;
+                padding: 10px;
+                margin-top: 15px;
+            }
+            
+            .estatisticas-rodada {
+                font-size: 12px;
+                padding: 6px;
+            }
+            
+            .resumo-turno {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            /* Responsividade para Ex-Campeões */
+            .campeao-card {
+                padding: 20px !important;
+            }
+
+            .campeao-card h3 {
+                font-size: 1.4rem !important;
+            }
+
+            .stat-ex-campeoes {
+                padding: 15px !important;
+            }
+
+            .stat-ex-campeoes div:first-child {
+                font-size: 1.5rem !important;
+            }
+
+            /* Responsividade para Artilharia */
+            .artilheiro-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .artilheiro-posicao {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .artilheiro-foto {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .artilheiro-gols {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo-banner">
+        <span id="statusConexao" class="status-conexao status-conectando">⚡ Conectando...</span>
+        <div id="controlesModo" style="margin-top: 5px; font-size: 14px; display: none;">
+            <span id="modoAtual">🔒 Modo: Consulta</span> | 
+            <button onclick="alternarModo()" style="background: none; border: 1px solid white; color: white; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                Alternar Modo
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Campeonato EA FC25 2025.2 </h1>
+			<h1>IFRN <i>campus</i> João Câmara</h1>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('tabela')">📊 Classificação</button>
+            <button class="tab" onclick="showTab('tabelaJogos')">📋 Tabela de Jogos</button>
+            <button class="tab" onclick="showTab('consultarJogos')">🔍 Consultar Jogos</button>
+            <button class="tab" onclick="showTab('cadastrarJogo')" id="tabCadastrarJogo" style="display: none;">⚽ Cadastrar Jogo</button>
+            <button class="tab" onclick="showTab('artilharia')">⚽ Artilharia</button>
+            <button class="tab" onclick="showTab('estatisticas')">📈 Estatísticas</button>
+            <button class="tab" onclick="showTab('exCampeoes')">🏆 Ex-Campeões</button>
+            <button class="tab" onclick="showTab('regulamento')">📋 Regulamento</button>
+            <button class="tab" onclick="showTab('jogadores')" id="tabJogadores" style="display: none;">👥 Jogadores</button>
+        </div>
+
+        <div id="alertContainer"></div>
+        <div id="indicadorModo"></div>
+
+        <!-- ABA TABELA -->
+        <div id="tabela" class="tab-content">
+            <div class="card">
+                <h2>📊 Tabela de Classificação</h2>
+                <div id="tabelaClassificacao"></div>
+            </div>
+        </div>
+
+        <!-- ABA TABELA DE JOGOS -->
+        <div id="tabelaJogos" class="tab-content hidden">
+            <div class="card">
+                <h2>📋 Tabela de Jogos do Campeonato</h2>
+                <div style="background: #f7fafc; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: #4a5568; margin: 0; text-align: center;">
+                        <strong>Sistema todos contra todos em dois turnos organizados por rodadas</strong><br>
+                        <small>Jogos realizados aparecem em <span style="background: #e6fffa; padding: 2px 6px; border-radius: 4px;">azul</span> • 
+                        Jogos pendentes em <span style="background: #fffbf0; padding: 2px 6px; border-radius: 4px;">amarelo</span></small>
+                    </p>
+                </div>
+                <div id="tabelaJogosContainer"></div>
+            </div>
+        </div>
+
+        <!-- ABA CONSULTAR JOGOS -->
+        <div id="consultarJogos" class="tab-content hidden">
+            <div class="card">
+                <h2>🔍 Consultar Jogos</h2>
+                
+                <h3 style="margin-top: 20px; color: #4a5568;">🔍 Filtros e Busca</h3>
+                <div class="form-row" style="margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label for="filtroJogador">Filtrar por Jogador:</label>
+                        <select id="filtroJogador">
+                            <option value="">Todos os jogadores</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="filtroTurno">Filtrar por Turno:</label>
+                        <select id="filtroTurno" onchange="listarTodosJogos()">
+                            <option value="">Todos os turnos</option>
+                            <option value="1">1º Turno</option>
+                            <option value="2">2º Turno</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row" style="margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label for="ordenarPor">Ordenar por:</label>
+                        <select id="ordenarPor" onchange="listarTodosJogos()">
+                            <option value="data-desc">Data (Mais recente)</option>
+                            <option value="data-asc">Data (Mais antigo)</option>
+                            <option value="mandante">Mandante (A-Z)</option>
+                            <option value="visitante">Visitante (A-Z)</option>
+                            <option value="gols-desc">Mais gols</option>
+                            <option value="turno-asc">Turno (1º depois 2º)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dataInicio">Data Início:</label>
+                        <input type="date" id="dataInicio" onchange="listarTodosJogos()">
+                    </div>
+                </div>
+                
+                <div class="form-row" style="margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label for="dataFim">Data Fim:</label>
+                        <input type="date" id="dataFim" onchange="listarTodosJogos()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <!-- Espaço vazio para manter alinhamento -->
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn" onclick="limparFiltros()">🔄 Limpar Filtros</button>
+                    <button class="btn" onclick="listarTodosJogos()">🔍 Aplicar Filtros</button>
+                </div>
+                
+                <h3 style="margin-top: 30px; color: #4a5568;">📋 Todos os Jogos <span id="contadorJogos"></span></h3>
+                <div id="listaJogosCompleta" class="jogos-list"></div>
+            </div>
+        </div>
+
+        <!-- ABA CADASTRAR JOGO -->
+        <div id="cadastrarJogo" class="tab-content hidden">
+            <div class="card">
+                <h2>⚽ Cadastrar Jogo</h2>
+                
+                <div id="formularioJogo">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mandante">Jogador Mandante:</label>
+                            <select id="mandante">
+                                <option value="">Selecione o mandante</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="visitante">Jogador Visitante:</label>
+                            <select id="visitante">
+                                <option value="">Selecione o visitante</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="golsMandante">Gols do Mandante:</label>
+                            <input type="number" id="golsMandante" min="0" value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="golsVisitante">Gols do Visitante:</label>
+                            <input type="number" id="golsVisitante" min="0" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="turnoJogo">Turno:</label>
+                        <select id="turnoJogo">
+                            <option value="1">1º Turno</option>
+                            <option value="2">2º Turno</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dataJogo">Data do Jogo:</label>
+                        <input type="date" id="dataJogo">
+                    </div>
+                    
+                    <button class="btn" onclick="cadastrarJogo()" id="btnCadastrar">Cadastrar Jogo</button>
+                    <button class="btn btn-danger hidden" onclick="cancelarEdicao()" id="btnCancelar">Cancelar Edição</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA ARTILHARIA -->
+        <div id="artilharia" class="tab-content hidden">
+            <div class="card">
+                <h2>⚽ Ranking de Artilheiros</h2>
+                
+                <div style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);">
+                    <h3 style="color: #b8860b; margin-bottom: 10px; font-size: 1.3rem;">👑 Artilheiros do Campeonato</h3>
+                    <p style="color: #8b7355; margin: 0; font-weight: 500;">Os goleadores que fazem a diferença em campo</p>
+                </div>
+
+                <!-- Seção Admin para Upload de Fotos -->
+                <div id="uploadFotosSection" class="sample-data-section hidden">
+                    <h3>📸 Gerenciar Fotos dos Jogadores</h3>
+                    <p>Adicione ou atualize as fotos dos artilheiros</p>
+                    
+                    <div class="form-row" style="margin-bottom: 20px;">
+                        <div class="form-group">
+                            <label for="jogadorFoto">Selecionar Jogador:</label>
+                            <select id="jogadorFoto">
+                                <option value="">Escolha um jogador</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Foto Atual:</label>
+                            <div id="fotoAtualPreview" style="text-align: center; margin-top: 10px;">
+                                <div style="color: #718096;">Nenhuma foto</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="foto-upload-area" onclick="document.getElementById('inputFoto').click()">
+                        <div style="font-size: 3rem; color: #667eea; margin-bottom: 10px;">📸</div>
+                        <div style="font-weight: 600; color: #4a5568; margin-bottom: 5px;">Clique para selecionar uma foto</div>
+                        <div style="color: #718096; font-size: 14px;">ou arraste e solte aqui</div>
+                        <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div id="previewArea" class="hidden" style="text-align: center;">
+                        <img id="previewImage" class="preview-foto">
+                        <div class="foto-actions">
+                            <button class="btn" onclick="salvarFotoJogador()">💾 Salvar Foto</button>
+                            <button class="btn btn-danger" onclick="cancelarUpload()">❌ Cancelar</button>
+                            <button class="btn btn-danger" onclick="removerFotoJogador()">🗑️ Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="artilhariaContainer" class="artilharia-container"></div>
+            </div>
+        </div>
+
+        <!-- ABA JOGADORES -->
+        <div id="jogadores" class="tab-content hidden">
+            <div class="card">
+                <h2>👥 Gerenciar Jogadores</h2>
+                
+                <div class="sample-data-section" id="secaoAdmin">
+                    <h3>🎮 Dados de Exemplo</h3>
+                    <p>Quer testar rapidamente? Carregue alguns dados de exemplo!</p>
+                    <button class="btn" onclick="carregarDadosExemplo()">🚀 Carregar Dados de Exemplo</button>
+                    <button class="btn btn-danger" onclick="limparTodosDados()">🗑️ Limpar Todos os Dados</button>
+                    <button class="btn" onclick="atualizarDadosFirebase()" style="background: #38a169;">🔄 Atualizar Dados</button>
+                </div>
+                
+                <div id="formularioJogador">
+                    <div class="form-group">
+                        <label for="nomeJogador">Nome do Jogador:</label>
+                        <input type="text" id="nomeJogador" placeholder="Digite o nome do jogador">
+                    </div>
+                    
+                    <button class="btn" onclick="cadastrarJogador()" id="btnCadastrarJogador">Cadastrar Jogador</button>
+                    <button class="btn btn-danger hidden" onclick="cancelarEdicaoJogador()" id="btnCancelarJogador">Cancelar Edição</button>
+                </div>
+                
+                <div id="listaJogadores" class="jogadores-list"></div>
+            </div>
+        </div>
+
+        <!-- ABA ESTATÍSTICAS -->
+        <div id="estatisticas" class="tab-content hidden">
+            <div class="card">
+                <h2>📈 Estatísticas do Campeonato</h2>
+                <div id="estatisticasContainer"></div>
+            </div>
+        </div>
+
+        <!-- ABA EX-CAMPEÕES -->
+        <div id="exCampeoes" class="tab-content hidden">
+            <div class="card">
+                <h2>🏆 Hall da Fama - Ex-Campeões</h2>
+                
+                <div style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);">
+                    <h3 style="color: #b8860b; margin-bottom: 10px; font-size: 1.3rem;">👑 Legado dos Campeões</h3>
+                    <p style="color: #8b7355; margin: 0; font-weight: 500;">Honrando aqueles que conquistaram a glória nos campeonatos anteriores</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 25px;">
+                    
+                    <!-- Campeão 2025.1 - MAIS RECENTE -->
+                    <div class="campeao-card campeao-destaque" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3); transform: scale(1.05);">
+                        <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
+                        <div style="position: relative; z-index: 2;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; display: inline-block; margin-bottom: 15px; font-size: 14px; font-weight: 600;">
+                                MAIS RECENTE
+                            </div>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Humberto Araújo</h3>
+                            <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2025.1</p>
+                        </div>
+                    </div>
+
+                    <!-- Campeão 2024.2 -->
+                    <div class="campeao-card" style="background: linear-gradient(135deg, #38a169 0%, #68d391 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(56, 161, 105, 0.3);">
+                        <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
+                        <div style="position: relative; z-index: 2;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 César Azevedo</h3>
+                            <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2024.2</p>
+                        </div>
+                    </div>
+
+                    <!-- Campeão 2024.1 -->
+                    <div class="campeao-card" style="background: linear-gradient(135deg, #e53e3e 0%, #fc8181 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(229, 62, 62, 0.3);">
+                        <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
+                        <div style="position: relative; z-index: 2;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Leonardo Guimarães</h3>
+                            <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2024.1</p>
+                        </div>
+                    </div>
+
+                    <!-- Campeão 2023 -->
+                    <div class="campeao-card" style="background: linear-gradient(135deg, #805ad5 0%, #b794f6 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(128, 90, 213, 0.3);">
+                        <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
+                        <div style="position: relative; z-index: 2;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Pedro Aires</h3>
+                            <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2023</p>
+                        </div>
+                    </div>
+
+                    <!-- Campeão 2022.2 -->
+                    <div class="campeao-card" style="background: linear-gradient(135deg, #d69e2e 0%, #f6e05e 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(214, 158, 46, 0.3);">
+                        <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
+                        <div style="position: relative; z-index: 2;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold; color: #2d3748;">🏆 Rafael Trentin</h3>
+                            <p style="font-size: 1.1rem; opacity: 0.8; margin: 0; color: #4a5568;">2022.2</p>
+                        </div>
+                    </div>
+
+                    <!-- Campeão 2022.1 -->
+                    <div class="campeao-card" style="background: linear-gradient(135deg, #319795 0%, #4fd1c7 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(49, 151, 149, 0.3);">
+                        <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
+                        <div style="position: relative; z-index: 2;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Augusto Silva</h3>
+                            <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2022.1</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #f7fafc; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center; border: 2px solid #e2e8f0;">
+                    <h4 style="color: #4a5568; margin-bottom: 15px; font-size: 1.2rem;">📊 Estatísticas dos Ex-Campeões</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <div class="stat-ex-campeoes" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2rem; font-weight: bold; color: #667eea; margin-bottom: 5px;">6</div>
+                            <div style="color: #718096; font-size: 14px;">Campeões Diferentes</div>
+                        </div>
+                        
+                        <div class="stat-ex-campeoes" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2rem; font-weight: bold; color: #38a169; margin-bottom: 5px;">6</div>
+                            <div style="color: #718096; font-size: 14px;">Edições Realizadas</div>
+                        </div>
+                        
+                        <div class="stat-ex-campeoes" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2rem; font-weight: bold; color: #e53e3e; margin-bottom: 5px;">4</div>
+                            <div style="color: #718096; font-size: 14px;">Anos de História</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 15px; margin-top: 25px; text-align: center;">
+                    <h4 style="margin-bottom: 10px; font-size: 1.1rem;">🌟 Próximo Campeão</h4>
+                    <p style="margin: 0; opacity: 0.9; font-size: 16px;">
+                        <strong>EA FC25 2025.2</strong> - A nova batalha começou!<br>
+                        <small style="opacity: 0.8;">Quem será o próximo nome neste hall da fama?</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA REGULAMENTO -->
+        <div id="regulamento" class="tab-content hidden">
+            <div class="card">
+                <h2>📋 Regulamento do Campeonato</h2>
+                
+                <div style="background: #f7fafc; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h3 style="color: #2d3748; text-align: center; margin-bottom: 15px;">
+                        🏛️ IFRN - Campus João Câmara<br>
+                        QVT - Qualidade de Vida no Trabalho<br>
+                        <strong>Regulamento do Campeonato EA FC25</strong>
+                    </h3>
+                </div>
+
+                <div style="line-height: 1.6; color: #4a5568;">
+                    
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #667eea; padding-left: 15px;">
+                        👥 1. Participantes
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a)</strong> O campeonato possui 10 atletas competindo de forma individual.</li>
+                        <li style="margin-bottom: 8px;"><strong>b)</strong> As partidas serão disputadas exclusivamente na modalidade masculina.</li>
+                        <li style="margin-bottom: 8px;"><strong>c)</strong> Os jogadores têm liberdade para escolher qualquer equipe ou seleção a cada partida, sem restrição.</li>
+                        <li style="margin-bottom: 8px;"><strong>d)</strong> É permitido que duas equipes idênticas se enfrentem em uma mesma partida.</li>
+                    </ul>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #667eea; padding-left: 15px;">
+                        🏆 2. Sistema de Pontuação
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a)</strong> Vitória: <strong>3 pontos</strong>.</li>
+                        <li style="margin-bottom: 8px;"><strong>b)</strong> Empate: <strong>1 ponto</strong>.</li>
+                        <li style="margin-bottom: 8px;"><strong>c)</strong> Derrota: <strong>0 pontos</strong>.</li>
+                    </ul>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #667eea; padding-left: 15px;">
+                        📊 3. Critérios de Classificação
+                    </h3>
+                    <ol style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;">Maior número de pontos (P)</li>
+                        <li style="margin-bottom: 8px;">Maior número de vitórias (V)</li>
+                        <li style="margin-bottom: 8px;">Maior saldo de gols (SG)</li>
+                        <li style="margin-bottom: 8px;">Maior número de gols marcados (GM)</li>
+                        <li style="margin-bottom: 8px;">Confronto Direto</li>
+                        <li style="margin-bottom: 8px;">Sorteio</li>
+                    </ol>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #667eea; padding-left: 15px;">
+                        🗓️ 4. Estrutura da Competição
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a)</strong> O campeonato será disputado em dois turnos no formato <strong>"todos contra todos"</strong>.</li>
+                        <li style="margin-bottom: 8px;"><strong>b)</strong> Cada jogador disputará um total de <strong>18 partidas</strong>.</li>
+                    </ul>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #667eea; padding-left: 15px;">
+                        🥇 5. Definição do Campeão
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a)</strong> O campeão geral será o jogador que acumular o <strong>maior número de pontos</strong> ao final dos dois turnos.</li>
+                    </ul>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #ffd700; padding-left: 15px;">
+                        🏅 6. Copa do Reitor
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a)</strong> Ao final do campeonato, será realizada a <strong>Copa do Reitor</strong>, um torneio comemorativo.</li>
+                        <li style="margin-bottom: 8px;"><strong>b)</strong> Participarão da Copa do Reitor os <strong>quatro melhores colocados</strong> ao final dos dois turnos.</li>
+                    </ul>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #ffd700; padding-left: 15px;">
+                        🏅 7. Formato da Copa do Reitor
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a) Semifinais:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Jogo 1: 1º colocado vs. 4º colocado</li>
+                                <li>Jogo 2: 2º colocado vs. 3º colocado</li>
+                            </ul>
+                        </li>
+                        <li style="margin-bottom: 8px;"><strong>b) Disputa de 3º Lugar:</strong> Perdedor de Jogo 1 vs. Perdedor de Jogo 2</li>
+                        <li style="margin-bottom: 8px;"><strong>c) Final:</strong> Vencedor de Jogo 1 vs. Vencedor de Jogo 2</li>
+                    </ul>
+                    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+                        <strong>📝 Obs.:</strong> A <strong>Copa do Reitor</strong> é um torneio comemorativo e não interfere na classificação geral do campeonato.
+                    </div>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #dc3545; padding-left: 15px;">
+                        ⬇️ 8. Rebaixamento
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a)</strong> Os <strong>dois últimos colocados</strong> na classificação geral, considerando a soma dos pontos dos dois turnos, serão rebaixados.</li>
+                    </ul>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #667eea; padding-left: 15px;">
+                        ⚽ 9. Partidas
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a)</strong> As equipes para cada partida serão escolhidas livremente pelos jogadores antes do início do jogo.</li>
+                        <li style="margin-bottom: 8px;"><strong>b)</strong> É permitido repetir equipes ou seleções em diferentes partidas, inclusive entre os dois jogadores de uma mesma partida.</li>
+                    </ul>
+
+                    <h3 style="color: #2d3748; margin-top: 25px; margin-bottom: 15px; border-left: 4px solid #667eea; padding-left: 15px;">
+                        📝 10. Considerações Finais
+                    </h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>a)</strong> A organização reserva-se o direito de realizar ajustes no regulamento em situações excepcionais.</li>
+                    </ul>
+
+                    <div style="background: #e6fffa; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center; border: 2px solid #4fd1c7;">
+                        <h4 style="color: #234e52; margin-bottom: 10px;">🏆 Boa sorte a todos os participantes!</h4>
+                        <p style="color: #2d3748; margin: 0;"><strong>QVT - Qualidade de Vida no Trabalho</strong><br>IFRN - Campus João Câmara</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Firebase configuration
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        // SUAS CONFIGURAÇÕES REAIS DO FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyBeTDa-pxCWPAIh-fNHv-PUxDPBnDyFnFQ",
+            authDomain: "campeonato-fifa-2025-fedde.firebaseapp.com",
+            projectId: "campeonato-fifa-2025-fedde",
+            storageBucket: "campeonato-fifa-2025-fedde.firebasestorage.app",
+            messagingSenderId: "227623544792",
+            appId: "1:227623544792:web:37019500d686f84c1bf4ad"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Expor globalmente para o script principal
+        window.firebaseDB = db;
+        window.firebaseUtils = {
+            collection,
+            addDoc,
+            getDocs,
+            doc,
+            updateDoc,
+            deleteDoc,
+            onSnapshot
+        };
+
+        console.log('🔥 Firebase inicializado com sucesso!');
+    </script>
+
+    <script>
+        // SISTEMA DE CAMPEONATO FIFA COM FIREBASE REATIVADO
+        let jogadores = {};
+        let jogos = [];
+        let jogoEditandoIndex = -1;
+        let jogadorEditando = null;
+        let modoAdmin = false;
+        let statusConexao = 'conectando';
+        let listenersAtivos = false;
+        const SENHA_ADMIN = "fifa2025";
+
+        // ALGORITMO ROUND ROBIN CLÁSSICO - IMPLEMENTAÇÃO CORRETA
+        function gerarRodadasBalanceadas(jogadores) {
+            const n = jogadores.length;
+            const rodadas = [];
+            
+            // Criar lista de jogadores para rotação
+            let listaJogadores = [...jogadores];
+            
+            // Se número ímpar, adicionar "BYE"
+            if (n % 2 === 1) {
+                listaJogadores.push('BYE');
+            }
+            
+            const totalJogadores = listaJogadores.length;
+            const numRodadas = totalJogadores - 1;
+            
+            // Gerar rodadas usando algoritmo Round Robin clássico
+            for (let rodada = 0; rodada < numRodadas; rodada++) {
+                const jogosRodada = [];
+                
+                // Criar arranjo para esta rodada
+                const arranjo = [...listaJogadores];
+                
+                // Rotacionar posições (exceto a primeira)
+                if (rodada > 0) {
+                    const fixo = arranjo[0];
+                    const rotativos = arranjo.slice(1);
+                    
+                    // Rotacionar array
+                    for (let i = 0; i < rodada; i++) {
+                        const ultimo = rotativos.pop();
+                        rotativos.unshift(ultimo);
+                    }
+                    
+                    arranjo.splice(0, arranjo.length, fixo, ...rotativos);
+                }
+                
+                // Formar pares de jogos
+                for (let i = 0; i < totalJogadores / 2; i++) {
+                    const mandante = arranjo[i];
+                    const visitante = arranjo[totalJogadores - 1 - i];
+                    
+                    // Só adicionar se não for BYE
+                    if (mandante !== 'BYE' && visitante !== 'BYE') {
+                        jogosRodada.push({
+                            mandante: mandante,
+                            visitante: visitante
+                        });
+                    }
+                }
+                
+                if (jogosRodada.length > 0) {
+                    rodadas.push(jogosRodada);
+                }
+            }
+            
+            // Verificação de qualidade
+            console.log(`🔍 Verificação do algoritmo para ${n} jogadores:`);
+            rodadas.forEach((rodada, i) => {
+                const jogadoresNaRodada = new Set();
+                rodada.forEach(jogo => {
+                    jogadoresNaRodada.add(jogo.mandante);
+                    jogadoresNaRodada.add(jogo.visitante);
+                });
+                
+                const esperado = n % 2 === 0 ? n : n - 1; // Se ímpar, um fica de fora
+                const jogosEsperados = Math.floor(n / 2);
+                
+                console.log(`Rodada ${i + 1}: ${jogadoresNaRodada.size} jogadores (esperado: ${esperado}), ${rodada.length} jogos (esperado: ${jogosEsperados})`);
+                
+                if (jogadoresNaRodada.size !== esperado || rodada.length !== jogosEsperados) {
+                    console.error(`❌ Erro na Rodada ${i + 1}!`);
+                }
+            });
+            
+            return rodadas;
+        }
+
+        // FUNÇÃO MODIFICADA: Gerar confrontos organizados por rodadas
+        function gerarTodosConfrontos(jogadores) {
+            const rodadasPrimeiroTurno = gerarRodadasBalanceadas(jogadores);
+            
+            // Segundo turno: inverter mandante e visitante
+            const rodadasSegundoTurno = rodadasPrimeiroTurno.map(rodada => 
+                rodada.map(jogo => ({
+                    mandante: jogo.visitante,
+                    visitante: jogo.mandante
+                }))
+            );
+            
+            return {
+                primeiroTurno: rodadasPrimeiroTurno,
+                segundoTurno: rodadasSegundoTurno
+            };
+        }
+
+        // FUNÇÃO MODIFICADA: Mostrar tabela de jogos com sistema de rodadas
+        function mostrarTabelaJogos() {
+            const container = document.getElementById('tabelaJogosContainer');
+            if (!container) return;
+
+            const nomesJogadores = Object.keys(jogadores).sort();
+            
+            if (nomesJogadores.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #718096;">Nenhum jogador cadastrado ainda.</p>';
+                return;
+            }
+
+            const confrontos = gerarTodosConfrontos(nomesJogadores);
+            const jogosRealizadosMap = new Map();
+            
+            // Mapear jogos realizados com turno específico
+            jogos.forEach(jogo => {
+                const turno = jogo.turno || 1;
+                const chave = `${jogo.mandante}_vs_${jogo.visitante}_turno${turno}`;
+                jogosRealizadosMap.set(chave, jogo);
+            });
+
+            let html = '';
+            
+            // PRIMEIRO TURNO
+            html += '<div class="turno-header">🏆 1º TURNO</div>';
+            html += criarTabelaTurnoPorRodadas(confrontos.primeiroTurno, jogosRealizadosMap, 1, 1);
+            
+            // SEGUNDO TURNO
+            html += '<div class="turno-header" style="margin-top: 40px;">🏆 2º TURNO</div>';
+            const rodadasTotaisPrimeiroTurno = confrontos.primeiroTurno.length;
+            html += criarTabelaTurnoPorRodadas(confrontos.segundoTurno, jogosRealizadosMap, rodadasTotaisPrimeiroTurno + 1, 2);
+
+            container.innerHTML = html;
+        }
+
+        // FUNÇÃO NOVA: Criar tabela organizada por rodadas
+        function criarTabelaTurnoPorRodadas(rodadas, jogosRealizadosMap, rodadaInicial, turnoNumero) {
+            let html = '';
+            let numeroJogoGlobal = 1;
+            
+            // Se for segundo turno, calcular número inicial correto
+            if (turnoNumero === 2) {
+                const jogadoresPorRodada = rodadas[0]?.length || 0;
+                numeroJogoGlobal = (rodadaInicial - 1) * jogadoresPorRodada + 1;
+            }
+            
+            rodadas.forEach((jogosRodada, indexRodada) => {
+                const numeroRodada = rodadaInicial + indexRodada;
+                
+                html += `<div class="rodada-header">⚽ RODADA ${numeroRodada}</div>`;
+                
+                html += `
+                    <table class="table tabela-jogos">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">Jogo</th>
+                                <th style="width: 100px;">Data</th>
+                                <th style="width: 140px;">Mandante</th>
+                                <th style="width: 80px;">Placar</th>
+                                <th style="width: 140px;">Visitante</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                let jogosRealizadosRodada = 0;
+                
+                jogosRodada.forEach((confronto, indexJogo) => {
+                    const numeroJogo = numeroJogoGlobal + indexJogo;
+                    const chave = `${confronto.mandante}_vs_${confronto.visitante}_turno${turnoNumero}`;
+                    const jogoRealizado = jogosRealizadosMap.get(chave);
+                    
+                    let classe = 'jogo-pendente';
+                    let data = '-';
+                    let placar = '-';
+                    let status = '⏳ Pendente';
+                    
+                    if (jogoRealizado) {
+                        classe = 'jogo-realizado';
+                        data = new Date(jogoRealizado.data + 'T00:00:00').toLocaleDateString('pt-BR', {
+                            day: '2-digit',
+                            month: '2-digit'
+                        });
+                        placar = `${jogoRealizado.golsMandante} x ${jogoRealizado.golsVisitante}`;
+                        
+                        if (jogoRealizado.golsMandante > jogoRealizado.golsVisitante) {
+                            status = `✅ ${confronto.mandante}`;
+                        } else if (jogoRealizado.golsVisitante > jogoRealizado.golsMandante) {
+                            status = `✅ ${confronto.visitante}`;
+                        } else {
+                            status = '🤝 Empate';
+                        }
+                        
+                        jogosRealizadosRodada++;
+                    }
+
+                    html += `
+                        <tr class="${classe}">
+                            <td><strong>${numeroJogo}</strong></td>
+                            <td>${data}</td>
+                            <td style="text-align: left;">${confronto.mandante}</td>
+                            <td><strong>${placar}</strong></td>
+                            <td style="text-align: left;">${confronto.visitante}</td>
+                            <td style="font-size: 12px;">${status}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table>';
+                
+                // Estatísticas da rodada
+                const totalJogosRodada = jogosRodada.length;
+                const percentualRodada = totalJogosRodada > 0 ? ((jogosRealizadosRodada / totalJogosRodada) * 100).toFixed(0) : 0;
+                
+                html += `
+                    <div class="estatisticas-rodada">
+                        📊 <strong>${jogosRealizadosRodada}</strong> de <strong>${totalJogosRodada}</strong> jogos realizados 
+                        (<strong>${percentualRodada}%</strong> completo)
+                    </div>
+                `;
+                
+                numeroJogoGlobal += jogosRodada.length;
+            });
+            
+            // Estatísticas gerais do turno
+            const totalJogosTurno = rodadas.reduce((total, rodada) => total + rodada.length, 0);
+            const jogosRealizadosTurno = rodadas.reduce((total, rodada) => {
+                return total + rodada.filter(confronto => {
+                    const chave = `${confronto.mandante}_vs_${confronto.visitante}_turno${turnoNumero}`;
+                    return jogosRealizadosMap.has(chave);
+                }).length;
+            }, 0);
+            
+            const percentualTurno = totalJogosTurno > 0 ? ((jogosRealizadosTurno / totalJogosTurno) * 100).toFixed(1) : 0;
+            
+            html += `
+                <div class="resumo-turno">
+                    <strong>📈 RESUMO ${turnoNumero}º TURNO:</strong> 
+                    ${jogosRealizadosTurno} de ${totalJogosTurno} jogos realizados 
+                    (<strong>${percentualTurno}%</strong> completo) • 
+                    ${rodadas.length} rodadas
+                </div>
+            `;
+            
+            return html;
+        }
+
+        // ===== FUNÇÕES DA ARTILHARIA =====
+
+        function mostrarArtilharia() {
+            const container = document.getElementById('artilhariaContainer');
+            if (!container) return;
+
+            const artilheiros = obterRankingArtilheiros();
+            
+            if (artilheiros.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #718096; margin: 20px 0;">Nenhum gol marcado ainda no campeonato.</p>';
+                return;
+            }
+
+            let html = '';
+            
+            artilheiros.forEach((jogador, index) => {
+                if (jogador.golsPro === 0) return; // Não mostrar quem não fez gols
+                
+                let positionClass = '';
+                if (index === 0) positionClass = 'first';
+                else if (index === 1) positionClass = 'second';
+                else if (index === 2) positionClass = 'third';
+                
+                const fotoSrc = jogador.foto || '';
+                const primeiraLetra = jogador.nome.charAt(0).toUpperCase();
+                
+                html += `
+                    <div class="artilheiro-item">
+                        <div class="artilheiro-posicao ${positionClass}">${index + 1}</div>
+                        
+                        ${fotoSrc ? 
+                            `<img src="${fotoSrc}" alt="${jogador.nome}" class="artilheiro-foto">` :
+                            `<div class="artilheiro-foto placeholder">${primeiraLetra}</div>`
+                        }
+                        
+                        <div class="artilheiro-info">
+                            <div class="artilheiro-nome">${jogador.nome}</div>
+                            <div class="artilheiro-posicao-texto">ATACANTE</div>
+                        </div>
+                        
+                        <div class="artilheiro-gols">
+                            <div class="artilheiro-numero-gols">${jogador.golsPro}</div>
+                            <div class="artilheiro-label-gols">GOL${jogador.golsPro === 1 ? '' : 'S'}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function obterRankingArtilheiros() {
+            const jogadoresArray = Object.values(jogadores);
+            
+            return jogadoresArray.sort((a, b) => {
+                if (b.golsPro !== a.golsPro) return b.golsPro - a.golsPro;
+                if (b.vitorias !== a.vitorias) return b.vitorias - a.vitorias;
+                return a.nome.localeCompare(b.nome);
+            });
+        }
+
+        function atualizarSelectJogadorFoto() {
+            const select = document.getElementById('jogadorFoto');
+            if (!select) return;
+            
+            const nomesOrdenados = Object.keys(jogadores).sort();
+            
+            select.innerHTML = '<option value="">Escolha um jogador</option>';
+            nomesOrdenados.forEach(nome => {
+                select.innerHTML += `<option value="${nome}">${nome}</option>`;
+            });
+            
+            select.onchange = function() {
+                const nome = this.value;
+                if (nome && jogadores[nome]) {
+                    mostrarFotoAtual(nome);
+                } else {
+                    limparPreviewFoto();
+                }
+            };
+        }
+
+        function mostrarFotoAtual(nomeJogador) {
+            const container = document.getElementById('fotoAtualPreview');
+            if (!container) return;
+            
+            const jogador = jogadores[nomeJogador];
+            if (!jogador) return;
+            
+            if (jogador.foto) {
+                container.innerHTML = `
+                    <img src="${jogador.foto}" alt="${nomeJogador}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #667eea;">
+                `;
+            } else {
+                container.innerHTML = '<div style="color: #718096;">Nenhuma foto</div>';
+            }
+        }
+
+        function limparPreviewFoto() {
+            const fotoAtual = document.getElementById('fotoAtualPreview');
+            const previewArea = document.getElementById('previewArea');
+            const inputFoto = document.getElementById('inputFoto');
+            
+            if (fotoAtual) {
+                fotoAtual.innerHTML = '<div style="color: #718096;">Nenhuma foto</div>';
+            }
+            
+            if (previewArea) {
+                previewArea.classList.add('hidden');
+            }
+            
+            if (inputFoto) {
+                inputFoto.value = '';
+            }
+        }
+
+        async function salvarFotoJogador() {
+            if (!modoAdmin) return;
+            
+            const nomeJogador = document.getElementById('jogadorFoto').value;
+            const previewImage = document.getElementById('previewImage');
+            
+            if (!nomeJogador) {
+                mostrarAlerta('Selecione um jogador primeiro!', 'error');
+                return;
+            }
+            
+            if (!previewImage.src) {
+                mostrarAlerta('Nenhuma foto selecionada!', 'error');
+                return;
+            }
+            
+            try {
+                // Atualizar dados do jogador
+                jogadores[nomeJogador].foto = previewImage.src;
+                
+                // Salvar no Firebase se online
+                if (statusConexao === 'online' && jogadores[nomeJogador].id) {
+                    const { doc, updateDoc } = window.firebaseUtils;
+                    await updateDoc(doc(window.firebaseDB, "jogadores", jogadores[nomeJogador].id), {
+                        foto: previewImage.src
+                    });
+                }
+                
+                salvarDadosLocal();
+                mostrarFotoAtual(nomeJogador);
+                cancelarUpload();
+                mostrarArtilharia(); // Atualizar ranking
+                
+                mostrarAlerta(`📸 Foto de ${nomeJogador} salva com sucesso!`);
+                
+            } catch (error) {
+                console.error('Erro ao salvar foto:', error);
+                mostrarAlerta('❌ Erro ao salvar foto', 'error');
+            }
+        }
+
+        async function removerFotoJogador() {
+            if (!modoAdmin) return;
+            
+            const nomeJogador = document.getElementById('jogadorFoto').value;
+            
+            if (!nomeJogador) {
+                mostrarAlerta('Selecione um jogador primeiro!', 'error');
+                return;
+            }
+            
+            if (!jogadores[nomeJogador].foto) {
+                mostrarAlerta('Este jogador não possui foto!', 'error');
+                return;
+            }
+            
+            if (confirm(`Tem certeza que deseja remover a foto de ${nomeJogador}?`)) {
+                try {
+                    // Remover foto dos dados
+                    delete jogadores[nomeJogador].foto;
+                    
+                    // Atualizar no Firebase se online
+                    if (statusConexao === 'online' && jogadores[nomeJogador].id) {
+                        const { doc, updateDoc } = window.firebaseUtils;
+                        await updateDoc(doc(window.firebaseDB, "jogadores", jogadores[nomeJogador].id), {
+                            foto: null
+                        });
+                    }
+                    
+                    salvarDadosLocal();
+                    mostrarFotoAtual(nomeJogador);
+                    cancelarUpload();
+                    mostrarArtilharia(); // Atualizar ranking
+                    
+                    mostrarAlerta(`🗑️ Foto de ${nomeJogador} removida!`);
+                    
+                } catch (error) {
+                    console.error('Erro ao remover foto:', error);
+                    mostrarAlerta('❌ Erro ao remover foto', 'error');
+                }
+            }
+        }
+
+        function cancelarUpload() {
+            const previewArea = document.getElementById('previewArea');
+            const inputFoto = document.getElementById('inputFoto');
+            
+            if (previewArea) {
+                previewArea.classList.add('hidden');
+            }
+            
+            if (inputFoto) {
+                inputFoto.value = '';
+            }
+        }
+
+        // Event listeners para upload de foto
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputFoto = document.getElementById('inputFoto');
+            const uploadArea = document.querySelector('.foto-upload-area');
+            const previewArea = document.getElementById('previewArea');
+            const previewImage = document.getElementById('previewImage');
+            
+            if (inputFoto) {
+                inputFoto.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        processarArquivoImagem(file);
+                    }
+                });
+            }
+            
+            if (uploadArea) {
+                // Drag and drop
+                uploadArea.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    uploadArea.classList.add('drag-over');
+                });
+                
+                uploadArea.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    uploadArea.classList.remove('drag-over');
+                });
+                
+                uploadArea.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    uploadArea.classList.remove('drag-over');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0 && files[0].type.startsWith('image/')) {
+                        processarArquivoImagem(files[0]);
+                    }
+                });
+            }
+            
+            function processarArquivoImagem(file) {
+                // Verificar tamanho (máximo 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    mostrarAlerta('Arquivo muito grande! Máximo 5MB.', 'error');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (previewImage && previewArea) {
+                        previewImage.src = e.target.result;
+                        previewArea.classList.remove('hidden');
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // FUNÇÕES DO FIREBASE
+        function atualizarStatusConexao(status) {
+            statusConexao = status;
+            const statusElement = document.getElementById('statusConexao');
+            if (!statusElement) return;
+
+            switch(status) {
+                case 'online':
+                    statusElement.textContent = '🟢 Online';
+                    statusElement.className = 'status-conexao status-online';
+                    break;
+                case 'offline':
+                    statusElement.textContent = '🔴 Offline';
+                    statusElement.className = 'status-conexao status-offline';
+                    break;
+                case 'conectando':
+                    statusElement.textContent = '⚡ Conectando...';
+                    statusElement.className = 'status-conexao status-conectando';
+                    break;
+            }
+        }
+
+        async function salvarJogadorFirebase(jogador) {
+            try {
+                if (!window.firebaseDB) throw new Error('Firebase não disponível');
+                const { collection, addDoc } = window.firebaseUtils;
+                await addDoc(collection(window.firebaseDB, "jogadores"), jogador);
+                console.log("✅ Jogador salvo no Firebase");
+                return true;
+            } catch (error) {
+                console.error("❌ Erro ao salvar jogador:", error);
+                mostrarAlerta("⚠️ Salvando localmente (Firebase offline)", "error");
+                return false;
+            }
+        }
+
+        async function salvarJogoFirebase(jogo) {
+            try {
+                if (!window.firebaseDB) throw new Error('Firebase não disponível');
+                const { collection, addDoc } = window.firebaseUtils;
+                await addDoc(collection(window.firebaseDB, "jogos"), jogo);
+                console.log("✅ Jogo salvo no Firebase");
+                return true;
+            } catch (error) {
+                console.error("❌ Erro ao salvar jogo:", error);
+                mostrarAlerta("⚠️ Salvando localmente (Firebase offline)", "error");
+                return false;
+            }
+        }
+
+        async function carregarDadosFirebase() {
+            try {
+                if (!window.firebaseDB) throw new Error('Firebase não disponível');
+                
+                atualizarStatusConexao('conectando');
+                const { collection, getDocs } = window.firebaseUtils;
+                
+                // Carregar jogadores
+                const jogadoresSnapshot = await getDocs(collection(window.firebaseDB, "jogadores"));
+                const jogadoresTemp = {};
+                jogadoresSnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    jogadoresTemp[data.nome] = { ...data, id: doc.id };
+                });
+
+                // Carregar jogos
+                const jogosSnapshot = await getDocs(collection(window.firebaseDB, "jogos"));
+                const jogosTemp = [];
+                jogosSnapshot.forEach((doc) => {
+                    jogosTemp.push({ ...doc.data(), id: doc.id });
+                });
+
+                // Só atualizar se conseguiu carregar
+                jogadores = jogadoresTemp;
+                jogos = jogosTemp;
+                
+                recalcularEstatisticas();
+                atualizarTudo();
+                atualizarStatusConexao('online');
+                
+                console.log("✅ Dados carregados do Firebase");
+                mostrarAlerta("🔥 Conectado ao Firebase!", "success");
+                
+                // Ativar listeners após carregamento bem-sucedido
+                if (!listenersAtivos) {
+                    configurarListenersFirebase();
+                }
+                
+                return true;
+            } catch (error) {
+                console.error("❌ Erro ao carregar dados do Firebase:", error);
+                atualizarStatusConexao('offline');
+                carregarDadosLocal();
+                return false;
+            }
+        }
+
+        function configurarListenersFirebase() {
+            try {
+                if (!window.firebaseDB || listenersAtivos) return;
+                
+                listenersAtivos = true;
+                const { collection, onSnapshot } = window.firebaseUtils;
+                
+                // Listener para jogadores
+                onSnapshot(collection(window.firebaseDB, "jogadores"), (snapshot) => {
+                    console.log("🔄 Atualizando jogadores...");
+                    const jogadoresTemp = {};
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        jogadoresTemp[data.nome] = { ...data, id: doc.id };
+                    });
+                    jogadores = jogadoresTemp;
+                    recalcularEstatisticas();
+                    atualizarTudo();
+                    atualizarStatusConexao('online');
+                }, (error) => {
+                    console.error("❌ Erro no listener de jogadores:", error);
+                    atualizarStatusConexao('offline');
+                });
+
+                // Listener para jogos
+                onSnapshot(collection(window.firebaseDB, "jogos"), (snapshot) => {
+                    console.log("🔄 Atualizando jogos...");
+                    const jogosTemp = [];
+                    snapshot.forEach((doc) => {
+                        jogosTemp.push({ ...doc.data(), id: doc.id });
+                    });
+                    jogos = jogosTemp;
+                    recalcularEstatisticas();
+                    atualizarTudo();
+                    atualizarStatusConexao('online');
+                }, (error) => {
+                    console.error("❌ Erro no listener de jogos:", error);
+                    atualizarStatusConexao('offline');
+                });
+
+                console.log("👂 Listeners do Firebase ativados");
+            } catch (error) {
+                console.error("❌ Erro ao configurar listeners:", error);
+            }
+        }
+
+        // FUNÇÕES DE ALERTA
+        function mostrarAlerta(mensagem, tipo = 'success') {
+            const alertContainer = document.getElementById('alertContainer');
+            if (!alertContainer) return;
+            
+            const alerta = document.createElement('div');
+            alerta.className = `alert alert-${tipo}`;
+            alerta.textContent = mensagem;
+            
+            alertContainer.appendChild(alerta);
+            
+            setTimeout(() => {
+                if (alerta.parentNode) {
+                    alerta.remove();
+                }
+            }, 3000);
+        }
+
+        // FUNÇÕES DE DADOS LOCAL
+        function salvarDadosLocal() {
+            const dados = {
+                jogadores: jogadores,
+                jogos: jogos
+            };
+            try {
+                localStorage.setItem('campeonatoFIFA', JSON.stringify(dados));
+            } catch (error) {
+                console.error('Erro ao salvar localmente:', error);
+            }
+        }
+
+        function carregarDadosLocal() {
+            try {
+                const dados = localStorage.getItem('campeonatoFIFA');
+                if (dados) {
+                    const dadosParsed = JSON.parse(dados);
+                    jogadores = dadosParsed.jogadores || {};
+                    jogos = dadosParsed.jogos || [];
+                    recalcularEstatisticas();
+                    atualizarTudo();
+                    mostrarAlerta("📱 Dados carregados!", "success");
+                }
+            } catch (error) {
+                console.error('Erro ao carregar dados locais:', error);
+                jogadores = {};
+                jogos = [];
+            }
+        }
+
+        // SISTEMA DE MODOS
+        function alternarModo() {
+            if (modoAdmin) {
+                modoAdmin = false;
+                salvarModo();
+                aplicarModo();
+            } else {
+                mostrarModalSenha();
+            }
+        }
+
+        function mostrarModalSenha() {
+            const modal = document.createElement('div');
+            modal.className = 'senha-modal';
+            modal.innerHTML = `
+                <div class="senha-modal-content">
+                    <h3 style="color: #4a5568; margin-bottom: 20px;">🔐 Acesso Restrito</h3>
+                    <p style="margin-bottom: 20px; color: #718096;">Digite a senha para continuar:</p>
+                    <input type="password" id="senhaInput" placeholder="Senha" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px;">
+                    <div>
+                        <button class="btn" onclick="verificarSenha()">🔓 Entrar</button>
+                        <button class="btn btn-danger" onclick="fecharModalSenha()">❌ Cancelar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                const senhaInput = document.getElementById('senhaInput');
+                if (senhaInput) {
+                    senhaInput.focus();
+                    senhaInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            verificarSenha();
+                        }
+                    });
+                }
+            }, 100);
+        }
+
+        function verificarSenha() {
+            const senhaInput = document.getElementById('senhaInput');
+            if (!senhaInput) return;
+            
+            const senha = senhaInput.value;
+            
+            if (senha === SENHA_ADMIN) {
+                modoAdmin = true;
+                salvarModo();
+                aplicarModo();
+                fecharModalSenha();
+                mostrarAlerta('🔓 Modo Administrador ativado!', 'success');
+            } else {
+                mostrarAlerta('❌ Senha incorreta!', 'error');
+                senhaInput.value = '';
+                senhaInput.focus();
+            }
+        }
+
+        function fecharModalSenha() {
+            const modal = document.querySelector('.senha-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        function aplicarModo() {
+            const modoAtual = document.getElementById('modoAtual');
+            const indicadorModo = document.getElementById('indicadorModo');
+            const tabJogadores = document.getElementById('tabJogadores');
+            const tabCadastrarJogo = document.getElementById('tabCadastrarJogo');
+            const controlesModo = document.getElementById('controlesModo');
+            const uploadFotosSection = document.getElementById('uploadFotosSection');
+            
+            if (controlesModo) {
+                if (modoAdmin) {
+                    controlesModo.style.display = 'block';
+                    if (modoAtual) {
+                        modoAtual.textContent = '🔓 Modo: Administrador';
+                    }
+                } else {
+                    controlesModo.style.display = 'none';
+                }
+            }
+            
+            if (tabJogadores) {
+                tabJogadores.style.display = modoAdmin ? 'block' : 'none';
+            }
+            
+            if (tabCadastrarJogo) {
+                tabCadastrarJogo.style.display = modoAdmin ? 'block' : 'none';
+            }
+            
+            if (uploadFotosSection) {
+                if (modoAdmin) {
+                    uploadFotosSection.classList.remove('hidden');
+                } else {
+                    uploadFotosSection.classList.add('hidden');
+                }
+            }
+            
+            const elementosAdmin = [
+                '#formularioJogador',
+                '#formularioJogo', 
+                '#secaoAdmin'
+            ];
+            
+            elementosAdmin.forEach(selector => {
+                const elemento = document.querySelector(selector);
+                if (elemento) {
+                    if (modoAdmin) {
+                        elemento.classList.remove('modo-consulta');
+                    } else {
+                        elemento.classList.add('modo-consulta');
+                    }
+                }
+            });
+            
+            if (indicadorModo) {
+                if (modoAdmin) {
+                    indicadorModo.innerHTML = `
+                        <div class="modo-admin">
+                            🔓 <strong>MODO ADMINISTRADOR</strong> - Você pode editar jogadores, jogos e todas as informações
+                        </div>
+                    `;
+                } else {
+                    indicadorModo.innerHTML = '';
+                }
+            }
+        }
+
+        function salvarModo() {
+            try {
+                localStorage.setItem('modoAdmin', modoAdmin.toString());
+            } catch (error) {
+                console.error('Erro ao salvar modo:', error);
+            }
+        }
+
+        function carregarModoSalvo() {
+            try {
+                const modoSalvo = localStorage.getItem('modoAdmin');
+                modoAdmin = modoSalvo === 'true';
+                aplicarModo();
+            } catch (error) {
+                console.error('Erro ao carregar modo:', error);
+                modoAdmin = false;
+            }
+        }
+
+        // FUNÇÕES DE ABAS
+        function showTab(tabName) {
+            if ((tabName === 'jogadores' || tabName === 'cadastrarJogo') && !modoAdmin) {
+                if (tabName === 'cadastrarJogo') {
+                    tabName = 'consultarJogos';
+                } else {
+                    tabName = 'tabela';
+                }
+            }
+            
+            if (jogadorEditando) {
+                cancelarEdicaoJogador();
+            }
+            
+            if (jogoEditandoIndex >= 0) {
+                cancelarEdicao();
+            }
+            
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const targetTab = document.getElementById(tabName);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+            }
+            
+            const tabButton = document.querySelector(`.tab[onclick="showTab('${tabName}')"]`);
+            if (tabButton) {
+                tabButton.classList.add('active');
+            }
+            
+            // Atualizar conteúdo das abas
+            if (tabName === 'tabela') {
+                mostrarTabela();
+            } else if (tabName === 'tabelaJogos') {
+                mostrarTabelaJogos();
+            } else if (tabName === 'estatisticas') {
+                mostrarEstatisticas();
+            } else if (tabName === 'artilharia') {
+                mostrarArtilharia();
+                atualizarSelectJogadorFoto();
+            } else if (tabName === 'exCampeoes') {
+                // Aba de ex-campeões não precisa de atualização dinâmica
+            } else if (tabName === 'consultarJogos') {
+                atualizarFiltroJogadores();
+                listarTodosJogos();
+            } else if (tabName === 'cadastrarJogo') {
+                atualizarSelectsJogadores();
+                const hoje = new Date();
+                const dataInput = document.getElementById('dataJogo');
+                if (dataInput && !dataInput.value) {
+                    dataInput.valueAsDate = hoje;
+                }
+                // Resetar turno para 1º turno
+                const turnoSelect = document.getElementById('turnoJogo');
+                if (turnoSelect && !turnoSelect.value) {
+                    turnoSelect.value = '1';
+                }
+            } else if (tabName === 'jogadores') {
+                listarJogadores();
+            }
+        }
+
+        // FUNÇÕES DE JOGADORES
+        async function cadastrarJogador() {
+            if (!modoAdmin) return;
+            
+            const nomeInput = document.getElementById('nomeJogador');
+            const btnCadastrar = document.getElementById('btnCadastrarJogador');
+            if (!nomeInput) return;
+            
+            const nome = nomeInput.value.trim();
+            
+            if (!nome) {
+                mostrarAlerta('Por favor, digite o nome do jogador!', 'error');
+                return;
+            }
+
+            // Evitar cliques duplos
+            if (btnCadastrar.disabled) return;
+            btnCadastrar.disabled = true;
+            const textoOriginal = btnCadastrar.textContent;
+            btnCadastrar.textContent = 'Salvando...';
+            
+            try {
+                if (jogadorEditando) {
+                    // Edição
+                    const nomeAntigo = jogadorEditando;
+                    
+                    if (nome !== nomeAntigo && jogadores[nome]) {
+                        mostrarAlerta('Já existe um jogador com este nome!', 'error');
+                        return;
+                    }
+                    
+                    // Atualizar no Firebase se online
+                    if (statusConexao === 'online' && jogadores[nomeAntigo].id) {
+                        const { doc, updateDoc } = window.firebaseUtils;
+                        await updateDoc(doc(window.firebaseDB, "jogadores", jogadores[nomeAntigo].id), {
+                            nome: nome
+                        });
+                    }
+                    
+                    const dadosJogador = { ...jogadores[nomeAntigo] };
+                    dadosJogador.nome = nome;
+                    
+                    delete jogadores[nomeAntigo];
+                    jogadores[nome] = dadosJogador;
+                    
+                    // Atualizar jogos que referenciam este jogador
+                    for (let i = 0; i < jogos.length; i++) {
+                        const jogo = jogos[i];
+                        let jogoAtualizado = false;
+                        
+                        if (jogo.mandante === nomeAntigo) {
+                            jogo.mandante = nome;
+                            jogoAtualizado = true;
+                        }
+                        
+                        if (jogo.visitante === nomeAntigo) {
+                            jogo.visitante = nome;
+                            jogoAtualizado = true;
+                        }
+                        
+                        // Atualizar no Firebase se necessário
+                        if (jogoAtualizado && statusConexao === 'online' && jogo.id) {
+                            const { doc, updateDoc } = window.firebaseUtils;
+                            await updateDoc(doc(window.firebaseDB, "jogos", jogo.id), {
+                                mandante: jogo.mandante,
+                                visitante: jogo.visitante
+                            });
+                        }
+                    }
+                    
+                    mostrarAlerta(`✏️ Jogador "${nomeAntigo}" renomeado para "${nome}"!`);
+                    cancelarEdicaoJogador();
+                    
+                } else {
+                    // Novo jogador
+                    if (jogadores[nome]) {
+                        mostrarAlerta('Jogador já está cadastrado!', 'error');
+                        return;
+                    }
+                    
+                    const novoJogador = {
+                        nome: nome,
+                        jogos: 0,
+                        vitorias: 0,
+                        derrotas: 0,
+                        empates: 0,
+                        golsPro: 0,
+                        golsSofridos: 0,
+                        dataCadastro: new Date().toISOString()
+                    };
+                    
+                    // Tentar salvar no Firebase primeiro
+                    const salvouFirebase = await salvarJogadorFirebase(novoJogador);
+                    
+                    if (!salvouFirebase) {
+                        // Fallback local se Firebase falhou
+                        jogadores[nome] = novoJogador;
+                        salvarDadosLocal();
+                        atualizarTudo();
+                    }
+                    
+                    mostrarAlerta(`✅ Jogador ${nome} cadastrado!`);
+                }
+                
+                nomeInput.value = '';
+                salvarDadosLocal(); // Backup local sempre
+                
+            } catch (error) {
+                console.error('Erro ao salvar jogador:', error);
+                mostrarAlerta('❌ Erro ao salvar jogador', 'error');
+            } finally {
+                setTimeout(() => {
+                    btnCadastrar.disabled = false;
+                    btnCadastrar.textContent = textoOriginal;
+                }, 1000);
+            }
+        }
+
+        function editarJogador(nome) {
+            if (!modoAdmin) return;
+            
+            jogadorEditando = nome;
+            document.getElementById('nomeJogador').value = nome;
+            document.getElementById('btnCadastrarJogador').textContent = 'Salvar Alterações';
+            document.getElementById('btnCancelarJogador').classList.remove('hidden');
+            
+            mostrarAlerta(`✏️ Editando jogador: ${nome}`, 'success');
+        }
+
+        function cancelarEdicaoJogador() {
+            jogadorEditando = null;
+            document.getElementById('nomeJogador').value = '';
+            document.getElementById('btnCadastrarJogador').textContent = 'Cadastrar Jogador';
+            document.getElementById('btnCancelarJogador').classList.add('hidden');
+        }
+
+        async function removerJogador(nome) {
+            if (!modoAdmin) return;
+            
+            if (confirm(`Tem certeza que deseja remover o jogador ${nome}?`)) {
+                try {
+                    // Remover do Firebase se online
+                    if (statusConexao === 'online' && jogadores[nome].id) {
+                        const { doc, deleteDoc } = window.firebaseUtils;
+                        await deleteDoc(doc(window.firebaseDB, "jogadores", jogadores[nome].id));
+                    }
+                    
+                    delete jogadores[nome];
+                    
+                    // Remover jogos relacionados
+                    const jogosParaRemover = jogos.filter(jogo => 
+                        jogo.mandante === nome || jogo.visitante === nome
+                    );
+                    
+                    for (const jogo of jogosParaRemover) {
+                        if (statusConexao === 'online' && jogo.id) {
+                            const { doc, deleteDoc } = window.firebaseUtils;
+                            await deleteDoc(doc(window.firebaseDB, "jogos", jogo.id));
+                        }
+                    }
+                    
+                    jogos = jogos.filter(jogo => 
+                        jogo.mandante !== nome && jogo.visitante !== nome
+                    );
+                    
+                    salvarDadosLocal(); // Backup local
+                    mostrarAlerta(`🗑️ Jogador ${nome} removido!`);
+                    recalcularEstatisticas();
+                    atualizarTudo();
+                    
+                } catch (error) {
+                    console.error('Erro ao remover jogador:', error);
+                    mostrarAlerta('❌ Erro ao remover jogador', 'error');
+                }
+            }
+        }
+
+        function listarJogadores() {
+            const container = document.getElementById('listaJogadores');
+            if (!container) return;
+            
+            const nomes = Object.keys(jogadores).sort();
+            
+            if (nomes.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #718096; margin-top: 20px;">Nenhum jogador cadastrado ainda.</p>';
+                return;
+            }
+            
+            let html = '<h3 style="margin-top: 30px; color: #4a5568;">📋 Jogadores Cadastrados</h3>';
+            html += '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;">';
+            
+            nomes.forEach(nome => {
+                const botoesAdmin = modoAdmin ? `
+                    <button class="btn" onclick="editarJogador('${nome}')" style="background: #3182ce; font-size: 14px; padding: 8px 16px;">
+                        ✏️ Editar
+                    </button>
+                    <button class="btn btn-danger" onclick="removerJogador('${nome}')" style="font-size: 14px; padding: 8px 16px;">
+                        🗑️ Remover
+                    </button>
+                ` : '';
+                
+                html += `
+                    <div style="background: #f7fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                        <div style="font-weight: 600; color: #4a5568; margin-bottom: 10px;">${nome}</div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            ${botoesAdmin}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function atualizarSelectsJogadores() {
+            const mandanteSelect = document.getElementById('mandante');
+            const visitanteSelect = document.getElementById('visitante');
+            
+            const nomesOrdenados = Object.keys(jogadores).sort();
+            
+            if (mandanteSelect) {
+                mandanteSelect.innerHTML = '<option value="">Selecione o mandante</option>';
+                nomesOrdenados.forEach(nome => {
+                    mandanteSelect.innerHTML += `<option value="${nome}">${nome}</option>`;
+                });
+            }
+            
+            if (visitanteSelect) {
+                visitanteSelect.innerHTML = '<option value="">Selecione o visitante</option>';
+                nomesOrdenados.forEach(nome => {
+                    visitanteSelect.innerHTML += `<option value="${nome}">${nome}</option>`;
+                });
+            }
+        }
+
+        function atualizarFiltroJogadores() {
+            const filtroSelect = document.getElementById('filtroJogador');
+            if (filtroSelect) {
+                const nomesOrdenados = Object.keys(jogadores).sort();
+                
+                filtroSelect.innerHTML = '<option value="">Todos os jogadores</option>';
+                nomesOrdenados.forEach(nome => {
+                    filtroSelect.innerHTML += `<option value="${nome}">${nome}</option>`;
+                });
+                filtroSelect.onchange = listarTodosJogos;
+            }
+        }
+
+        // FUNÇÕES DE JOGOS
+        async function cadastrarJogo() {
+            if (!modoAdmin) return;
+            
+            const mandante = document.getElementById('mandante').value;
+            const visitante = document.getElementById('visitante').value;
+            const golsMandante = parseInt(document.getElementById('golsMandante').value) || 0;
+            const golsVisitante = parseInt(document.getElementById('golsVisitante').value) || 0;
+            const dataJogo = document.getElementById('dataJogo').value;
+            const turno = parseInt(document.getElementById('turnoJogo').value);
+            const btnCadastrar = document.getElementById('btnCadastrar');
+            
+            if (!mandante || !visitante) {
+                mostrarAlerta('Selecione ambos os jogadores!', 'error');
+                return;
+            }
+            
+            if (mandante === visitante) {
+                mostrarAlerta('Um jogador não pode jogar contra si mesmo!', 'error');
+                return;
+            }
+            
+            // Verificar se já existe jogo entre esses jogadores neste turno
+            const jaExiste = jogos.some(jogo => 
+                jogo.mandante === mandante && 
+                jogo.visitante === visitante && 
+                jogo.turno === turno && 
+                jogos.indexOf(jogo) !== jogoEditandoIndex
+            );
+            
+            if (jaExiste) {
+                mostrarAlerta(`Já existe um jogo entre ${mandante} e ${visitante} no ${turno}º turno!`, 'error');
+                return;
+            }
+
+            // Evitar cliques duplos
+            if (btnCadastrar.disabled) return;
+            btnCadastrar.disabled = true;
+            const textoOriginal = btnCadastrar.textContent;
+            btnCadastrar.textContent = 'Salvando...';
+            
+            const jogo = {
+                mandante,
+                visitante,
+                golsMandante,
+                golsVisitante,
+                data: dataJogo,
+                turno: turno,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                if (jogoEditandoIndex >= 0) {
+                    // Edição
+                    const jogoAntigo = jogos[jogoEditandoIndex];
+                    reverterEstatisticasJogo(jogoAntigo);
+                    
+                    // Atualizar no Firebase se online
+                    if (statusConexao === 'online' && jogoAntigo.id) {
+                        const { doc, updateDoc } = window.firebaseUtils;
+                        await updateDoc(doc(window.firebaseDB, "jogos", jogoAntigo.id), jogo);
+                    }
+                    
+                    jogos[jogoEditandoIndex] = { ...jogo, id: jogoAntigo.id };
+                    atualizarEstatisticasJogo(jogo);
+                    mostrarAlerta(`✏️ Jogo editado: ${turno}º turno!`);
+                    cancelarEdicao();
+                } else {
+                    // Novo jogo
+                    console.log('Salvando novo jogo:', jogo);
+                    const salvouFirebase = await salvarJogoFirebase(jogo);
+                    
+                    if (!salvouFirebase) {
+                        // Fallback local se Firebase falhou
+                        jogos.push(jogo);
+                        atualizarEstatisticasJogo(jogo);
+                        atualizarTudo();
+                    }
+                    
+                    mostrarAlerta(`⚽ Jogo cadastrado: ${mandante} ${golsMandante} x ${golsVisitante} ${visitante} (${turno}º turno)`);
+                }
+                
+                limparFormularioJogo();
+                salvarDadosLocal(); // Backup local sempre
+                
+            } catch (error) {
+                console.error('Erro ao salvar jogo:', error);
+                mostrarAlerta('❌ Erro ao salvar jogo', 'error');
+            } finally {
+                setTimeout(() => {
+                    btnCadastrar.disabled = false;
+                    btnCadastrar.textContent = textoOriginal;
+                }, 1000);
+            }
+        }
+
+        function limparFormularioJogo() {
+            const elementos = ['mandante', 'visitante', 'golsMandante', 'golsVisitante'];
+            elementos.forEach(id => {
+                const elemento = document.getElementById(id);
+                if (elemento) {
+                    if (id === 'golsMandante' || id === 'golsVisitante') {
+                        elemento.value = '0';
+                    } else {
+                        elemento.value = '';
+                    }
+                }
+            });
+            // Resetar turno para 1º turno
+            const turnoSelect = document.getElementById('turnoJogo');
+            if (turnoSelect) {
+                turnoSelect.value = '1';
+            }
+        }
+
+        function editarJogo(index) {
+            if (!modoAdmin) return;
+            
+            const jogo = jogos[index];
+            if (!jogo) return;
+            
+            showTab('cadastrarJogo');
+            
+            document.getElementById('mandante').value = jogo.mandante;
+            document.getElementById('visitante').value = jogo.visitante;
+            document.getElementById('golsMandante').value = jogo.golsMandante;
+            document.getElementById('golsVisitante').value = jogo.golsVisitante;
+            document.getElementById('dataJogo').value = jogo.data;
+            document.getElementById('turnoJogo').value = jogo.turno || 1; // Default para 1º turno se não tiver
+            
+            jogoEditandoIndex = index;
+            document.getElementById('btnCadastrar').textContent = 'Salvar Alterações';
+            document.getElementById('btnCancelar').classList.remove('hidden');
+            
+            mostrarAlerta(`✏️ Editando jogo do ${jogo.turno || 1}º turno`, 'success');
+        }
+
+        function cancelarEdicao() {
+            jogoEditandoIndex = -1;
+            document.getElementById('btnCadastrar').textContent = 'Cadastrar Jogo';
+            document.getElementById('btnCancelar').classList.add('hidden');
+            limparFormularioJogo();
+        }
+
+        async function excluirJogo(index) {
+            if (!modoAdmin) return;
+            
+            const jogo = jogos[index];
+            if (!jogo) return;
+            
+            if (confirm(`Tem certeza que deseja excluir o jogo?`)) {
+                try {
+                    // Remover do Firebase se online
+                    if (statusConexao === 'online' && jogo.id) {
+                        const { doc, deleteDoc } = window.firebaseUtils;
+                        await deleteDoc(doc(window.firebaseDB, "jogos", jogo.id));
+                    }
+                    
+                    reverterEstatisticasJogo(jogo);
+                    jogos.splice(index, 1);
+                    
+                    if (jogoEditandoIndex === index) {
+                        cancelarEdicao();
+                    } else if (jogoEditandoIndex > index) {
+                        jogoEditandoIndex--;
+                    }
+                    
+                    salvarDadosLocal(); // Backup local
+                    mostrarAlerta(`🗑️ Jogo excluído!`);
+                    atualizarTudo();
+                    
+                } catch (error) {
+                    console.error('Erro ao excluir jogo:', error);
+                    mostrarAlerta('❌ Erro ao excluir jogo', 'error');
+                }
+            }
+        }
+
+        function atualizarEstatisticasJogo(jogo) {
+            const jogadorMandante = jogadores[jogo.mandante];
+            const jogadorVisitante = jogadores[jogo.visitante];
+            
+            if (!jogadorMandante || !jogadorVisitante) return;
+            
+            jogadorMandante.jogos++;
+            jogadorVisitante.jogos++;
+            
+            jogadorMandante.golsPro += jogo.golsMandante;
+            jogadorMandante.golsSofridos += jogo.golsVisitante;
+            jogadorVisitante.golsPro += jogo.golsVisitante;
+            jogadorVisitante.golsSofridos += jogo.golsMandante;
+            
+            if (jogo.golsMandante > jogo.golsVisitante) {
+                jogadorMandante.vitorias++;
+                jogadorVisitante.derrotas++;
+            } else if (jogo.golsVisitante > jogo.golsMandante) {
+                jogadorVisitante.vitorias++;
+                jogadorMandante.derrotas++;
+            } else {
+                jogadorMandante.empates++;
+                jogadorVisitante.empates++;
+            }
+        }
+
+        function reverterEstatisticasJogo(jogo) {
+            const jogadorMandante = jogadores[jogo.mandante];
+            const jogadorVisitante = jogadores[jogo.visitante];
+            
+            if (!jogadorMandante || !jogadorVisitante) return;
+            
+            jogadorMandante.jogos--;
+            jogadorVisitante.jogos--;
+            
+            jogadorMandante.golsPro -= jogo.golsMandante;
+            jogadorMandante.golsSofridos -= jogo.golsVisitante;
+            jogadorVisitante.golsPro -= jogo.golsVisitante;
+            jogadorVisitante.golsSofridos -= jogo.golsMandante;
+            
+            if (jogo.golsMandante > jogo.golsVisitante) {
+                jogadorMandante.vitorias--;
+                jogadorVisitante.derrotas--;
+            } else if (jogo.golsVisitante > jogo.golsMandante) {
+                jogadorVisitante.vitorias--;
+                jogadorMandante.derrotas--;
+            } else {
+                jogadorMandante.empates--;
+                jogadorVisitante.empates--;
+            }
+        }
+
+        function listarTodosJogos() {
+            const container = document.getElementById('listaJogosCompleta');
+            const contadorContainer = document.getElementById('contadorJogos');
+            
+            if (!container) return;
+            
+            if (jogos.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #718096; margin-top: 20px;">Nenhum jogo cadastrado ainda.</p>';
+                if (contadorContainer) contadorContainer.textContent = '';
+                return;
+            }
+            
+            let jogosFiltrados = [...jogos];
+            
+            const filtroJogador = document.getElementById('filtroJogador')?.value;
+            if (filtroJogador) {
+                jogosFiltrados = jogosFiltrados.filter(jogo => 
+                    jogo.mandante === filtroJogador || jogo.visitante === filtroJogador
+                );
+            }
+            
+            const filtroTurno = document.getElementById('filtroTurno')?.value;
+            if (filtroTurno) {
+                jogosFiltrados = jogosFiltrados.filter(jogo => 
+                    (jogo.turno || 1).toString() === filtroTurno
+                );
+            }
+            
+            const dataInicio = document.getElementById('dataInicio')?.value;
+            const dataFim = document.getElementById('dataFim')?.value;
+            
+            if (dataInicio) {
+                jogosFiltrados = jogosFiltrados.filter(jogo => jogo.data >= dataInicio);
+            }
+            
+            if (dataFim) {
+                jogosFiltrados = jogosFiltrados.filter(jogo => jogo.data <= dataFim);
+            }
+            
+            const ordenacao = document.getElementById('ordenarPor')?.value || 'data-desc';
+            
+            jogosFiltrados.sort((a, b) => {
+                switch (ordenacao) {
+                    case 'data-asc':
+                        return new Date(a.data) - new Date(b.data);
+                    case 'data-desc':
+                        return new Date(b.data) - new Date(a.data);
+                    case 'mandante':
+                        return a.mandante.localeCompare(b.mandante);
+                    case 'visitante':
+                        return a.visitante.localeCompare(b.visitante);
+                    case 'gols-desc':
+                        return (b.golsMandante + b.golsVisitante) - (a.golsMandante + a.golsVisitante);
+                    case 'turno-asc':
+                        return (a.turno || 1) - (b.turno || 1);
+                    default:
+                        return new Date(b.data) - new Date(a.data);
+                }
+            });
+            
+            if (contadorContainer) {
+                contadorContainer.textContent = `(${jogosFiltrados.length} de ${jogos.length})`;
+            }
+            
+            let html = '';
+            
+            jogosFiltrados.forEach((jogo, index) => {
+                const indiceReal = jogos.findIndex(j => 
+                    j.mandante === jogo.mandante && 
+                    j.visitante === jogo.visitante && 
+                    j.data === jogo.data &&
+                    j.golsMandante === jogo.golsMandante &&
+                    j.golsVisitante === jogo.golsVisitante &&
+                    j.turno === jogo.turno
+                );
+                
+                const dataFormatada = new Date(jogo.data + 'T00:00:00').toLocaleDateString('pt-BR');
+                const totalGols = jogo.golsMandante + jogo.golsVisitante;
+                
+                let resultado = '';
+                if (jogo.golsMandante > jogo.golsVisitante) {
+                    resultado = `<span style="color: #2f855a;">✅ Vitória ${jogo.mandante}</span>`;
+                } else if (jogo.golsVisitante > jogo.golsMandante) {
+                    resultado = `<span style="color: #2f855a;">✅ Vitória ${jogo.visitante}</span>`;
+                } else {
+                    resultado = `<span style="color: #d69e2e;">🤝 Empate</span>`;
+                }
+                
+                html += `
+                    <div class="jogo-item">
+                        <div class="jogo-info">
+                            <div class="jogo-resultado">
+                                ${jogo.mandante} <strong>${jogo.golsMandante} x ${jogo.golsVisitante}</strong> ${jogo.visitante}
+                            </div>
+                            <div class="jogo-data">
+                                📅 ${dataFormatada} • ⚽ ${totalGols} gol${totalGols !== 1 ? 's' : ''} • ${resultado} • 🏆 ${jogo.turno || 1}º Turno
+                            </div>
+                        </div>
+                        <div class="jogo-acoes">
+                            ${modoAdmin ? `
+                                <button class="btn btn-small" onclick="editarJogo(${indiceReal})" style="background: #3182ce;">
+                                    ✏️ Editar
+                                </button>
+                                <button class="btn btn-danger btn-small" onclick="excluirJogo(${indiceReal})">
+                                    🗑️ Excluir
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function limparFiltros() {
+            const elementos = ['filtroJogador', 'filtroTurno', 'ordenarPor', 'dataInicio', 'dataFim'];
+            elementos.forEach(id => {
+                const elemento = document.getElementById(id);
+                if (elemento) {
+                    if (id === 'ordenarPor') {
+                        elemento.value = 'data-desc';
+                    } else {
+                        elemento.value = '';
+                    }
+                }
+            });
+            
+            listarTodosJogos();
+            mostrarAlerta('🔄 Filtros limpos!');
+        }
+
+        // DADOS DE EXEMPLO
+        async function carregarDadosExemplo() {
+            if (!modoAdmin) return;
+            
+            const jogadoresExemplo = [
+                'César Augusto', 'Augusto', 'Francesco', 'Guilherme', 
+                'Leonardo', 'Humberto', 'Lucas Hiago', 'Luciano', 
+                'Luiz Carlos', 'Yuri'
+            ];
+
+            const jogosExemplo = [
+                { mandante: 'Augusto', visitante: 'César Augusto', golsMandante: 3, golsVisitante: 3, data: '2025-09-14', turno: 1 },
+                { mandante: 'Augusto', visitante: 'Leonardo', golsMandante: 2, golsVisitante: 1, data: '2025-10-05', turno: 1 },
+                { mandante: 'Guilherme', visitante: 'César Augusto', golsMandante: 1, golsVisitante: 4, data: '2025-10-05', turno: 1 },
+                { mandante: 'César Augusto', visitante: 'Francesco', golsMandante: 3, golsVisitante: 0, data: '2025-10-06', turno: 1 },
+                { mandante: 'Leonardo', visitante: 'Humberto', golsMandante: 2, golsVisitante: 1, data: '2025-10-07', turno: 1 },
+                { mandante: 'Yuri', visitante: 'Lucas Hiago', golsMandante: 1, golsVisitante: 2, data: '2025-10-07', turno: 1 },
+                { mandante: 'César Augusto', visitante: 'Augusto', golsMandante: 1, golsVisitante: 2, data: '2025-10-10', turno: 2 },
+                { mandante: 'Leonardo', visitante: 'Augusto', golsMandante: 0, golsVisitante: 3, data: '2025-10-11', turno: 2 }
+            ];
+
+            try {
+                mostrarAlerta('📥 Carregando dados de exemplo...', 'success');
+                
+                // Cadastrar jogadores
+                for (const nome of jogadoresExemplo) {
+                    const jogador = {
+                        nome: nome,
+                        jogos: 0,
+                        vitorias: 0,
+                        derrotas: 0,
+                        empates: 0,
+                        golsPro: 0,
+                        golsSofridos: 0,
+                        dataCadastro: new Date().toISOString()
+                    };
+                    
+                    const salvouFirebase = await salvarJogadorFirebase(jogador);
+                    if (!salvouFirebase) {
+                        jogadores[nome] = jogador;
+                    }
+                }
+                
+                // Aguardar um pouco para os jogadores serem salvos
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Cadastrar jogos
+                for (const jogoData of jogosExemplo) {
+                    const jogo = {
+                        ...jogoData,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    const salvouFirebase = await salvarJogoFirebase(jogo);
+                    if (!salvouFirebase) {
+                        jogos.push(jogo);
+                        atualizarEstatisticasJogo(jogo);
+                    }
+                }
+                
+                salvarDadosLocal(); // Backup local sempre
+                if (statusConexao === 'offline') {
+                    atualizarTudo();
+                }
+                
+                mostrarAlerta('✅ Dados de exemplo carregados!');
+                
+            } catch (error) {
+                console.error('Erro ao carregar dados de exemplo:', error);
+                mostrarAlerta('❌ Erro ao carregar dados de exemplo', 'error');
+            }
+        }
+
+        async function limparTodosDados() {
+            if (!modoAdmin) return;
+            
+            if (confirm('Tem certeza que deseja limpar todos os dados?')) {
+                try {
+                    // Limpar Firebase se online
+                    if (statusConexao === 'online' && window.firebaseDB) {
+                        const { collection, getDocs, deleteDoc } = window.firebaseUtils;
+                        
+                        // Limpar jogadores
+                        const jogadoresSnapshot = await getDocs(collection(window.firebaseDB, "jogadores"));
+                        for (const doc of jogadoresSnapshot.docs) {
+                            await deleteDoc(doc.ref);
+                        }
+                        
+                        // Limpar jogos
+                        const jogosSnapshot = await getDocs(collection(window.firebaseDB, "jogos"));
+                        for (const doc of jogosSnapshot.docs) {
+                            await deleteDoc(doc.ref);
+                        }
+                        
+                        mostrarAlerta('🔥 Dados limpos no Firebase!');
+                    }
+                    
+                    // Limpar dados locais
+                    jogadores = {};
+                    jogos = [];
+                    localStorage.removeItem('campeonatoFIFA');
+                    
+                    if (statusConexao === 'offline') {
+                        atualizarTudo();
+                    }
+                    
+                    mostrarAlerta('🗑️ Todos os dados foram limpos!');
+                    
+                } catch (error) {
+                    console.error('Erro ao limpar dados:', error);
+                    mostrarAlerta('❌ Erro ao limpar dados', 'error');
+                }
+            }
+        }
+
+        function atualizarDadosFirebase() {
+            if (statusConexao === 'online') {
+                mostrarAlerta('🔄 Dados já sincronizados!', 'success');
+            } else {
+                mostrarAlerta('🔄 Tentando reconectar...', 'success');
+                carregarDadosFirebase();
+            }
+        }
+
+        // TABELA DE CLASSIFICAÇÃO
+        function obterClassificacao() {
+            const jogadoresArray = Object.values(jogadores);
+            
+            jogadoresArray.forEach(jogador => {
+                jogador.pontos = (jogador.vitorias * 3) + (jogador.empates * 1);
+                jogador.saldoGols = jogador.golsPro - jogador.golsSofridos;
+                jogador.aproveitamento = jogador.jogos > 0 ? 
+                    (jogador.pontos / (jogador.jogos * 3) * 100) : 0;
+            });
+            
+            return jogadoresArray.sort((a, b) => {
+                if (b.pontos !== a.pontos) return b.pontos - a.pontos;
+                if (b.vitorias !== a.vitorias) return b.vitorias - a.vitorias;
+                if (b.saldoGols !== a.saldoGols) return b.saldoGols - a.saldoGols;
+                if (b.golsPro !== a.golsPro) return b.golsPro - a.golsPro;
+                return a.nome.localeCompare(b.nome);
+            });
+        }
+
+        function mostrarTabela() {
+            const container = document.getElementById('tabelaClassificacao');
+            if (!container) return;
+            
+            const classificacao = obterClassificacao();
+            
+            if (classificacao.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #718096;">Nenhum jogador cadastrado ainda.</p>';
+                return;
+            }
+            
+            let html = `
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Jogador</th>
+                            <th>P</th>
+                            <th>J</th>
+                            <th>V</th>
+                            <th>D</th>
+                            <th>E</th>
+                            <th>GP</th>
+                            <th>GS</th>
+                            <th>SG</th>
+                            <th>AP%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            classificacao.forEach((jogador, index) => {
+                let positionClass = 'position';
+                if (index === 0) positionClass += ' first';
+                else if (index === 1) positionClass += ' second';
+                else if (index === 2) positionClass += ' third';
+                
+                let cellClass = '';
+                if (classificacao.length >= 6) {
+                    if (index < 4) {
+                        cellClass = 'classificado';
+                    } else if (index >= classificacao.length - 2) {
+                        cellClass = 'rebaixado';
+                    }
+                }
+                
+                html += `
+                    <tr>
+                        <td class="${cellClass}"><span class="${positionClass}">${index + 1}</span></td>
+                        <td class="${cellClass}" style="text-align: left; font-weight: 600;">${jogador.nome}</td>
+                        <td><strong>${jogador.pontos}</strong></td>
+                        <td>${jogador.jogos}</td>
+                        <td>${jogador.vitorias}</td>
+                        <td>${jogador.derrotas}</td>
+                        <td>${jogador.empates}</td>
+                        <td>${jogador.golsPro}</td>
+                        <td>${jogador.golsSofridos}</td>
+                        <td>${jogador.saldoGols >= 0 ? '+' : ''}${jogador.saldoGols}</td>
+                        <td>${jogador.aproveitamento.toFixed(1)}%</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+                <div style="margin-top: 15px; color: #718096; font-size: 14px;">
+                    <strong>Legenda:</strong> P=Pontos, J=Jogos, V=Vitórias, D=Derrotas, E=Empates, GP=Gols Pró, GS=Gols Sofridos, SG=Saldo de Gols, AP=Aproveitamento
+                </div>
+            `;
+            
+            if (classificacao.length >= 6) {
+                html += `
+                    <div style="margin-top: 10px; display: flex; gap: 20px; font-size: 14px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 20px; height: 20px; background-color: #c6f6d5; border-radius: 4px; border: 1px solid #9ae6b4;"></div>
+                            <span><strong>Copa do Reitor</strong> (4 primeiros)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 20px; height: 20px; background-color: #fed7d7; border-radius: 4px; border: 1px solid #feb2b2;"></div>
+                            <span><strong>Rebaixados</strong> (2 últimos)</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // ESTATÍSTICAS
+        function mostrarEstatisticas() {
+            const container = document.getElementById('estatisticasContainer');
+            if (!container) return;
+            
+            const classificacao = obterClassificacao();
+            const totalJogos = jogos.length;
+            const totalGols = Object.values(jogadores).reduce((sum, j) => sum + j.golsPro, 0);
+            
+            if (classificacao.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #718096;">Nenhum dado disponível ainda.</p>';
+                return;
+            }
+            
+            const lider = classificacao[0];
+            const artilheiro = Object.values(jogadores).reduce((max, jogador) => 
+                jogador.golsPro > max.golsPro ? jogador : max
+            );
+            
+            let html = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">${classificacao.length}</div>
+                        <div class="stat-label">👥 Jogadores</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${totalJogos}</div>
+                        <div class="stat-label">⚽ Jogos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${totalGols}</div>
+                        <div class="stat-label">🥅 Gols</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${totalJogos > 0 ? (totalGols / totalJogos).toFixed(1) : '0.0'}</div>
+                        <div class="stat-label">📊 Média Gols/Jogo</div>
+                    </div>
+                </div>
+                
+                <div style="background: #f7fafc; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                    <h3 style="color: #4a5568; margin-bottom: 15px;">🏆 Destaques</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <div>
+                            <strong>🥇 Líder:</strong><br>
+                            ${lider.nome} (${lider.pontos} pontos)
+                        </div>
+                        <div>
+                            <strong>⚽ Artilheiro:</strong><br>
+                            ${artilheiro.nome} (${artilheiro.golsPro} gols)
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        // UTILITÁRIOS
+        function recalcularEstatisticas() {
+            Object.values(jogadores).forEach(jogador => {
+                jogador.jogos = 0;
+                jogador.vitorias = 0;
+                jogador.derrotas = 0;
+                jogador.empates = 0;
+                jogador.golsPro = 0;
+                jogador.golsSofridos = 0;
+            });
+            
+            jogos.forEach(jogo => {
+                atualizarEstatisticasJogo(jogo);
+            });
+        }
+
+        function atualizarTudo() {
+            listarJogadores();
+            atualizarSelectsJogadores();
+            atualizarFiltroJogadores();
+            atualizarSelectJogadorFoto();
+            listarTodosJogos();
+            mostrarTabela();
+            mostrarTabelaJogos();
+            mostrarEstatisticas();
+            mostrarArtilharia();
+        }
+
+        // INICIALIZAÇÃO
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('🚀 Iniciando sistema...');
+            
+            carregarModoSalvo();
+            
+            // Tentar conectar ao Firebase primeiro
+            const firebaseOk = await carregarDadosFirebase();
+            
+            // Se Firebase falhou, carregar dados locais como fallback
+            if (!firebaseOk) {
+                carregarDadosLocal();
+            }
+            
+            const hoje = new Date();
+            const dataInput = document.getElementById('dataJogo');
+            if (dataInput) {
+                dataInput.valueAsDate = hoje;
+            }
+            
+            // Inicializar turno
+            const turnoSelect = document.getElementById('turnoJogo');
+            if (turnoSelect) {
+                turnoSelect.value = '1';
+            }
+            
+            const nomeInput = document.getElementById('nomeJogador');
+            if (nomeInput) {
+                nomeInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        cadastrarJogador();
+                    }
+                });
+            }
+            
+            // Modo admin secreto
+            let clickCount = 0;
+            let clickTimer = null;
+            
+            document.querySelector('.header h1').addEventListener('click', function() {
+                if (!modoAdmin) {
+                    clickCount++;
+                    
+                    if (clickCount === 1) {
+                        clickTimer = setTimeout(() => {
+                            clickCount = 0;
+                        }, 3000);
+                    }
+                    
+                    if (clickCount === 5) {
+                        clearTimeout(clickTimer);
+                        clickCount = 0;
+                        mostrarModalSenha();
+                    }
+                }
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.shiftKey && e.key === 'A' && !modoAdmin) {
+                    e.preventDefault();
+                    mostrarModalSenha();
+                }
+            });
+            
+            mostrarTabela();
+            
+            // Aguardar um pouco para Firebase inicializar
+            setTimeout(() => {
+                if (statusConexao === 'online') {
+                    console.log('✅ Sistema carregado com Firebase!');
+                    mostrarAlerta('🔥 Conectado ao Firebase! Dados sincronizados.', 'success');
+                } else {
+                    console.log('📱 Sistema rodando localmente');
+                    mostrarAlerta('📱 Modo local ativo. Dados salvos no navegador.', 'success');
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
