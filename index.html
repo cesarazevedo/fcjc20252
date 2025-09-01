@@ -861,6 +861,7 @@
 
                 <div id="statusCopaReitor"></div>
                 <div id="chaveamentoCopaReitor"></div>
+                <div id="cadastroJogosCopaReitor"></div>
                 <div id="jogosCopaReitor"></div>
             </div>
         </div>
@@ -1079,6 +1080,16 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="tipoJogo">Tipo de Jogo:</label>
+                        <select id="tipoJogo" onchange="alterarTipoJogo()">
+                            <option value="campeonato">Campeonato Regular</option>
+                            <option value="semifinal">Semifinal Copa do Reitor</option>
+                            <option value="final">Final Copa do Reitor</option>
+                            <option value="terceiro">3º Lugar Copa do Reitor</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="dataJogo">Data do Jogo:</label>
                         <input type="date" id="dataJogo">
                     </div>
@@ -1204,7 +1215,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #38a169 0%, #68d391 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(56, 161, 105, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Humberto Araújo</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 César Azevedo</h3>
                             <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2024.2</p>
                         </div>
                     </div>
@@ -1213,7 +1224,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #e53e3e 0%, #fc8181 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(229, 62, 62, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 César Azevedo</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Leonardo Guimarães</h3>
                             <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2024.1</p>
                         </div>
                     </div>
@@ -1222,7 +1233,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #805ad5 0%, #b794f6 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(128, 90, 213, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Leonardo Guimarães</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Pedro Aires</h3>
                             <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2023</p>
                         </div>
                     </div>
@@ -1231,7 +1242,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #d69e2e 0%, #f6e05e 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(214, 158, 46, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold; color: #2d3748;">🏆 Pedro Aires</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold; color: #2d3748;">🏆 Rafael Trentin</h3>
                             <p style="font-size: 1.1rem; opacity: 0.8; margin: 0; color: #4a5568;">2022.2</p>
                         </div>
                     </div>
@@ -1240,7 +1251,7 @@
                     <div class="campeao-card" style="background: linear-gradient(135deg, #319795 0%, #4fd1c7 100%); padding: 25px; border-radius: 15px; color: white; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(49, 151, 149, 0.3);">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 4rem; opacity: 0.2;">🏆</div>
                         <div style="position: relative; z-index: 2;">
-                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Rafael Trentin</h3>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: bold;">🏆 Augusto Silva</h3>
                             <p style="font-size: 1.1rem; opacity: 0.9; margin: 0;">2022.1</p>
                         </div>
                     </div>
@@ -1251,7 +1262,7 @@
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
                         <div class="stat-ex-campeoes" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <div style="font-size: 2rem; font-weight: bold; color: #667eea; margin-bottom: 5px;">5</div>
+                            <div style="font-size: 2rem; font-weight: bold; color: #667eea; margin-bottom: 5px;">6</div>
                             <div style="color: #718096; font-size: 14px;">Campeões Diferentes</div>
                         </div>
                         
@@ -2307,7 +2318,7 @@
                 if (tabName === 'cadastrarJogo') {
                     tabName = 'consultarJogos';
                 } else {
-                    tabName = 'tabela';
+                    tabName = 'dashboard';
                 }
             }
             
@@ -2338,7 +2349,9 @@
             }
             
             // Atualizar conteúdo das abas
-            if (tabName === 'tabela') {
+            if (tabName === 'dashboard') {
+                mostrarDashboard();
+            } else if (tabName === 'tabela') {
                 mostrarTabela();
             } else if (tabName === 'tabelaJogos') {
                 mostrarTabelaJogos();
@@ -2347,6 +2360,13 @@
             } else if (tabName === 'artilharia') {
                 mostrarArtilharia();
                 atualizarSelectJogadorFoto();
+            } else if (tabName === 'copaReitor') {
+                verificarCopaReitor();
+            } else if (tabName === 'relatorios') {
+                atualizarSelectsRelatorios();
+                showReportTab('individual');
+            } else if (tabName === 'historico') {
+                mostrarListaCampeonatos();
             } else if (tabName === 'exCampeoes') {
                 // Aba de ex-campeões não precisa de atualização dinâmica
             } else if (tabName === 'consultarJogos') {
@@ -2666,6 +2686,7 @@
                 golsVisitante,
                 data: dataJogo,
                 turno: turno,
+                tipoJogo: document.getElementById('tipoJogo').value || 'campeonato',
                 timestamp: new Date().toISOString()
             };
             
@@ -2730,6 +2751,29 @@
             const turnoSelect = document.getElementById('turnoJogo');
             if (turnoSelect) {
                 turnoSelect.value = '1';
+            }
+            
+            // Resetar tipo de jogo
+            const tipoSelect = document.getElementById('tipoJogo');
+            if (tipoSelect) {
+                tipoSelect.value = 'campeonato';
+            }
+        }
+
+        function alterarTipoJogo() {
+            const tipoJogo = document.getElementById('tipoJogo').value;
+            const turnoSelect = document.getElementById('turnoJogo');
+            
+            if (tipoJogo !== 'campeonato') {
+                // Para jogos da Copa do Reitor, desabilitar turno
+                if (turnoSelect) {
+                    turnoSelect.disabled = true;
+                    turnoSelect.value = '1'; // Copa é sempre considerada como extensão
+                }
+            } else {
+                if (turnoSelect) {
+                    turnoSelect.disabled = false;
+                }
             }
         }
 
@@ -3509,6 +3553,8 @@
             }
 
             mostrarChaveamentoCopa(classificados);
+            mostrarCadastroJogosCopa(classificados);
+            mostrarJogosCopa();
         }
 
         function verificarCampeonatoCompleto() {
@@ -3516,7 +3562,7 @@
             if (nomesJogadores.length < 2) return false;
 
             const totalJogosEsperados = nomesJogadores.length * (nomesJogadores.length - 1);
-            const jogosRealizados = jogos.length;
+            const jogosRealizados = jogos.filter(jogo => (jogo.tipoJogo || 'campeonato') === 'campeonato').length;
             
             return jogosRealizados >= totalJogosEsperados * 0.8; // 80% dos jogos realizados
         }
@@ -3545,7 +3591,7 @@
                     </div>
                 </div>
 
-                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
                     <h4 style="color: #4a5568; margin-bottom: 15px; text-align: center;">⚔️ Chaveamento das Semifinais</h4>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div style="background: #f7fafc; padding: 15px; border-radius: 8px; text-align: center;">
@@ -3561,21 +3607,239 @@
                             <div style="font-size: 1.1rem; font-weight: 600;">${semifinal2.visitante}</div>
                         </div>
                     </div>
-                    
-                    ${modoAdmin ? `
-                        <div style="text-align: center; margin-top: 20px;">
-                            <button class="btn" onclick="iniciarCopaReitor()">🚀 Iniciar Copa do Reitor</button>
-                        </div>
-                    ` : ''}
                 </div>
             `;
+        }
+
+        function mostrarCadastroJogosCopa(classificados) {
+            const container = document.getElementById('cadastroJogosCopaReitor');
+            if (!container || !modoAdmin) return;
+
+            // Verificar jogos já realizados
+            const jogosCopaRealizados = jogos.filter(jogo => jogo.tipoJogo && jogo.tipoJogo !== 'campeonato');
+            const semifinal1Realizada = jogosCopaRealizados.find(jogo => jogo.tipoJogo === 'semifinal' && 
+                ((jogo.mandante === classificados[0].nome && jogo.visitante === classificados[3].nome) ||
+                 (jogo.visitante === classificados[0].nome && jogo.mandante === classificados[3].nome)));
+            const semifinal2Realizada = jogosCopaRealizados.find(jogo => jogo.tipoJogo === 'semifinal' && 
+                ((jogo.mandante === classificados[1].nome && jogo.visitante === classificados[2].nome) ||
+                 (jogo.visitante === classificados[1].nome && jogo.mandante === classificados[2].nome)));
+            
+            const finalRealizada = jogosCopaRealizados.find(jogo => jogo.tipoJogo === 'final');
+            const terceiroRealizado = jogosCopaRealizados.find(jogo => jogo.tipoJogo === 'terceiro');
+
+            const ambaSemisRealizadas = semifinal1Realizada && semifinal2Realizada;
+
+            let html = `
+                <div style="background: #f7fafc; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
+                    <h4 style="color: #4a5568; margin-bottom: 15px; text-align: center;">⚽ Cadastrar Jogos da Copa do Reitor</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                        <!-- Semifinal 1 -->
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid ${semifinal1Realizada ? '#9ae6b4' : '#e2e8f0'};">
+                            <h5 style="color: #4a5568; margin-bottom: 10px; text-align: center;">
+                                ${semifinal1Realizada ? '✅' : '⏳'} Semifinal 1
+                            </h5>
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <strong>${classificados[0].nome} vs ${classificados[3].nome}</strong>
+                            </div>
+                            ${semifinal1Realizada ? `
+                                <div style="text-align: center; background: #c6f6d5; padding: 8px; border-radius: 6px; color: #2f855a;">
+                                    <strong>Resultado: ${semifinal1Realizada.mandante} ${semifinal1Realizada.golsMandante} x ${semifinal1Realizada.golsVisitante} ${semifinal1Realizada.visitante}</strong>
+                                </div>
+                            ` : `
+                                <button class="btn" onclick="prepararJogoCopa('semifinal', '${classificados[0].nome}', '${classificados[3].nome}')" style="width: 100%; font-size: 14px;">
+                                    ⚽ Cadastrar
+                                </button>
+                            `}
+                        </div>
+
+                        <!-- Semifinal 2 -->
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid ${semifinal2Realizada ? '#9ae6b4' : '#e2e8f0'};">
+                            <h5 style="color: #4a5568; margin-bottom: 10px; text-align: center;">
+                                ${semifinal2Realizada ? '✅' : '⏳'} Semifinal 2
+                            </h5>
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <strong>${classificados[1].nome} vs ${classificados[2].nome}</strong>
+                            </div>
+                            ${semifinal2Realizada ? `
+                                <div style="text-align: center; background: #c6f6d5; padding: 8px; border-radius: 6px; color: #2f855a;">
+                                    <strong>Resultado: ${semifinal2Realizada.mandante} ${semifinal2Realizada.golsMandante} x ${semifinal2Realizada.golsVisitante} ${semifinal2Realizada.visitante}</strong>
+                                </div>
+                            ` : `
+                                <button class="btn" onclick="prepararJogoCopa('semifinal', '${classificados[1].nome}', '${classificados[2].nome}')" style="width: 100%; font-size: 14px;">
+                                    ⚽ Cadastrar
+                                </button>
+                            `}
+                        </div>
+                    </div>
+            `;
+
+            if (ambaSemisRealizadas) {
+                const vencedorSemi1 = semifinal1Realizada.golsMandante > semifinal1Realizada.golsVisitante ? 
+                    semifinal1Realizada.mandante : semifinal1Realizada.visitante;
+                const vencedorSemi2 = semifinal2Realizada.golsMandante > semifinal2Realizada.golsVisitante ? 
+                    semifinal2Realizada.mandante : semifinal2Realizada.visitante;
+                
+                const perdedorSemi1 = semifinal1Realizada.golsMandante < semifinal1Realizada.golsVisitante ? 
+                    semifinal1Realizada.mandante : semifinal1Realizada.visitante;
+                const perdedorSemi2 = semifinal2Realizada.golsMandante < semifinal2Realizada.golsVisitante ? 
+                    semifinal2Realizada.mandante : semifinal2Realizada.visitante;
+
+                html += `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                        <!-- Final -->
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid ${finalRealizada ? '#9ae6b4' : '#ffc107'};">
+                            <h5 style="color: #4a5568; margin-bottom: 10px; text-align: center;">
+                                ${finalRealizada ? '✅' : '🏆'} FINAL
+                            </h5>
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <strong>${vencedorSemi1} vs ${vencedorSemi2}</strong>
+                            </div>
+                            ${finalRealizada ? `
+                                <div style="text-align: center; background: #c6f6d5; padding: 8px; border-radius: 6px; color: #2f855a;">
+                                    <strong>CAMPEÃO: ${finalRealizada.golsMandante > finalRealizada.golsVisitante ? finalRealizada.mandante : finalRealizada.visitante}</strong><br>
+                                    <small>${finalRealizada.mandante} ${finalRealizada.golsMandante} x ${finalRealizada.golsVisitante} ${finalRealizada.visitante}</small>
+                                </div>
+                            ` : `
+                                <button class="btn" onclick="prepararJogoCopa('final', '${vencedorSemi1}', '${vencedorSemi2}')" style="width: 100%; font-size: 14px; background: #d69e2e;">
+                                    🏆 Cadastrar Final
+                                </button>
+                            `}
+                        </div>
+
+                        <!-- 3º Lugar -->
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid ${terceiroRealizado ? '#9ae6b4' : '#cd7f32'};">
+                            <h5 style="color: #4a5568; margin-bottom: 10px; text-align: center;">
+                                ${terceiroRealizado ? '✅' : '🥉'} 3º LUGAR
+                            </h5>
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <strong>${perdedorSemi1} vs ${perdedorSemi2}</strong>
+                            </div>
+                            ${terceiroRealizado ? `
+                                <div style="text-align: center; background: #c6f6d5; padding: 8px; border-radius: 6px; color: #2f855a;">
+                                    <strong>3º LUGAR: ${terceiroRealizado.golsMandante > terceiroRealizado.golsVisitante ? terceiroRealizado.mandante : terceiroRealizado.visitante}</strong><br>
+                                    <small>${terceiroRealizado.mandante} ${terceiroRealizado.golsMandante} x ${terceiroRealizado.golsVisitante} ${terceiroRealizado.visitante}</small>
+                                </div>
+                            ` : `
+                                <button class="btn" onclick="prepararJogoCopa('terceiro', '${perdedorSemi1}', '${perdedorSemi2}')" style="width: 100%; font-size: 14px; background: #cd7f32;">
+                                    🥉 Cadastrar 3º Lugar
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function prepararJogoCopa(tipoJogo, jogador1, jogador2) {
+            showTab('cadastrarJogo');
+            
+            // Preencher formulário
+            document.getElementById('mandante').value = jogador1;
+            document.getElementById('visitante').value = jogador2;
+            document.getElementById('tipoJogo').value = tipoJogo;
+            document.getElementById('golsMandante').value = '0';
+            document.getElementById('golsVisitante').value = '0';
+            
+            // Desabilitar turno para jogos da Copa
+            const turnoSelect = document.getElementById('turnoJogo');
+            if (turnoSelect) {
+                turnoSelect.disabled = true;
+                turnoSelect.value = '1';
+            }
+            
+            // Definir data para hoje
+            const hoje = new Date();
+            const dataInput = document.getElementById('dataJogo');
+            if (dataInput) {
+                dataInput.valueAsDate = hoje;
+            }
+            
+            const tipoNome = {
+                'semifinal': 'Semifinal',
+                'final': 'Final',
+                'terceiro': 'Disputa de 3º Lugar'
+            };
+            
+            mostrarAlerta(`🏆 Formulário preparado para ${tipoNome[tipoJogo]} da Copa do Reitor!`, 'success');
+        }
+
+        function mostrarJogosCopa() {
+            const container = document.getElementById('jogosCopaReitor');
+            if (!container) return;
+
+            const jogosCopaRealizados = jogos.filter(jogo => jogo.tipoJogo && jogo.tipoJogo !== 'campeonato');
+            
+            if (jogosCopaRealizados.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = `
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <h4 style="color: #4a5568; margin-bottom: 15px; text-align: center;">🏆 Jogos Realizados da Copa do Reitor</h4>
+                    
+                    <div style="display: grid; gap: 10px;">
+            `;
+
+            const tipoOrdem = { 'semifinal': 1, 'terceiro': 2, 'final': 3 };
+            const tipoNomes = {
+                'semifinal': 'SEMIFINAL',
+                'terceiro': '3º LUGAR', 
+                'final': 'FINAL'
+            };
+
+            jogosCopaRealizados
+                .sort((a, b) => tipoOrdem[a.tipoJogo] - tipoOrdem[b.tipoJogo])
+                .forEach(jogo => {
+                    const data = new Date(jogo.data + 'T00:00:00').toLocaleDateString('pt-BR');
+                    const vencedor = jogo.golsMandante > jogo.golsVisitante ? jogo.mandante : 
+                                   jogo.golsVisitante > jogo.golsMandante ? jogo.visitante : 'Empate';
+                    
+                    html += `
+                        <div style="background: #f7fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600; color: #667eea; font-size: 12px; margin-bottom: 5px;">
+                                        ${tipoNomes[jogo.tipoJogo]}
+                                    </div>
+                                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 5px;">
+                                        ${jogo.mandante} <strong>${jogo.golsMandante} x ${jogo.golsVisitante}</strong> ${jogo.visitante}
+                                    </div>
+                                    <div style="color: #718096; font-size: 14px;">
+                                        📅 ${data} • ${vencedor !== 'Empate' ? `🏆 ${vencedor}` : '🤝 Empate'}
+                                    </div>
+                                </div>
+                                ${modoAdmin ? `
+                                    <div style="display: flex; gap: 8px;">
+                                        <button class="btn btn-small" onclick="editarJogo(${jogos.indexOf(jogo)})" style="background: #3182ce;">
+                                            ✏️ Editar
+                                        </button>
+                                        <button class="btn btn-danger btn-small" onclick="excluirJogo(${jogos.indexOf(jogo)})">
+                                            🗑️ Excluir
+                                        </button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
         }
 
         function iniciarCopaReitor() {
             if (!modoAdmin) return;
             
-            mostrarAlerta('🏆 Copa do Reitor iniciada! Cadastre os jogos das semifinais na aba "Cadastrar Jogo".', 'success');
-            // Aqui poderia implementar mais lógica específica para a Copa do Reitor
+            mostrarAlerta('🏆 Copa do Reitor habilitada! Use os botões acima para cadastrar os jogos das semifinais.', 'success');
         }
 
         // ===== FUNÇÕES DOS RELATÓRIOS =====
